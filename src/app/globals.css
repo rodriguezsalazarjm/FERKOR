@@ -1,0 +1,163 @@
+@import "tailwindcss";
+
+/*
+ * FERKOR — tokens de marca (sistema de diseño V2.0, lámina roja).
+ * Las familias tipográficas llegan desde next/font como variables CSS (layout.tsx).
+ */
+@theme {
+  --color-*: initial;
+  --color-transparent: transparent;
+  --color-current: currentColor;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  --color-ink: #0b0b0d;          /* negro industrial */
+  --color-ink-800: #16171a;
+  --color-ink-700: #22242a;
+  --color-ink-600: #2a2d33;      /* línea sobre negro */
+  --color-red: #d11b1b;          /* rojo técnico */
+  --color-red-hover: #b01515;
+  --color-red-light: #ff5247;    /* rojo para texto pequeño sobre negro */
+  --color-steel: #6b6f76;        /* gris acero */
+  --color-steel-light: #9ba0a8;  /* texto secundario sobre negro */
+  --color-steel-line: #7a7f87;
+  --color-paper: #f4f5f6;        /* blanco técnico */
+  --color-line: #dcdfe3;
+  --color-blueprint: #0e2a47;    /* azul blueprint */
+  --color-blueprint-deep: #0a2038;
+  --color-blueprint-line: #5c98d6;
+  --color-success: #1e7148;
+  --color-danger: #9e1010;
+
+  --font-display: var(--font-barlow), "Arial Narrow", sans-serif;
+  --font-sans: var(--font-plex-sans), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --radius-sm: 2px;
+
+  --breakpoint-xs: 30rem;
+  --breakpoint-3xl: 100rem;
+
+  --ease-cut: cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-white);
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    font-size: 16px;
+    line-height: 1.625;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection {
+    background: var(--color-red);
+    color: var(--color-white);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-ink);
+    outline-offset: 2px;
+  }
+
+  .on-dark :focus-visible,
+  .on-dark:focus-visible {
+    outline-color: var(--color-white);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@layer components {
+  /* Contenedor editorial: 1200px de contenido + gutter. */
+  .wrap {
+    width: 100%;
+    max-width: calc(1200px + 2 * var(--gutter));
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    --gutter: 1rem;
+  }
+  @media (min-width: 48rem) {
+    .wrap {
+      --gutter: 2rem;
+    }
+  }
+  @media (min-width: 90rem) {
+    .wrap {
+      max-width: calc(1280px + 2 * var(--gutter));
+    }
+  }
+
+  /* Titulares de impacto: Barlow Condensed en mayúsculas. */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 800;
+    text-transform: uppercase;
+    line-height: 0.92;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+
+  .eyebrow {
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+  }
+
+  .mono-index {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  /* Chaflán a 45° en la esquina superior derecha (corte del isotipo). */
+  .chamfer-sm {
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
+  }
+  .chamfer-md {
+    clip-path: polygon(0 0, calc(100% - 16px) 0, 100% 16px, 100% 100%, 0 100%);
+  }
+  .chamfer-lg {
+    clip-path: polygon(0 0, calc(100% - 32px) 0, 100% 32px, 100% 100%, 0 100%);
+  }
+  .chamfer-xl {
+    clip-path: polygon(0 0, calc(100% - 64px) 0, 100% 64px, 100% 100%, 0 100%);
+  }
+
+  /* Textos de cotas en dibujos técnicos SVG. */
+  .dw-text {
+    font-family: var(--font-mono);
+    fill: currentColor;
+    letter-spacing: 0.04em;
+  }
+
+  /* Fotografía de marca: desaturada y contrastada; el rojo lo pone la gráfica. */
+  .photo-grade {
+    filter: grayscale(1) contrast(1.12) brightness(0.92);
+  }
+}
