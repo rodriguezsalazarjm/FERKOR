@@ -71,13 +71,13 @@ export function Header() {
                   <Link
                     href={item.href}
                     aria-current={active ? "page" : undefined}
-                    className={`relative block px-3 py-2 text-[13px] font-medium tracking-[0.08em] uppercase transition-colors ${
+                    className={`relative block px-2 py-2 text-[12px] font-medium tracking-[0.06em] whitespace-nowrap uppercase transition-colors xl:px-3 xl:text-[13px] xl:tracking-[0.08em] ${
                       active ? "text-white" : "text-white/65 hover:text-white"
                     }`}
                   >
                     {item.label}
                     <span
-                      className={`absolute right-3 bottom-0.5 left-3 h-0.5 origin-left bg-red transition-transform duration-300 ease-cut ${
+                      className={`absolute right-2 bottom-0.5 left-2 h-0.5 xl:right-3 xl:left-3 origin-left bg-red transition-transform duration-300 ease-cut ${
                         active ? "scale-x-100" : "scale-x-0"
                       }`}
                       aria-hidden="true"
@@ -92,9 +92,12 @@ export function Header() {
         <div className="flex items-center gap-3">
           <Link
             href={quoteCta.href}
-            className="chamfer-sm group hidden min-h-11 items-center gap-3 bg-red px-5 text-sm font-semibold text-white transition-colors hover:bg-red-hover sm:inline-flex"
+            aria-label={quoteCta.label}
+            className="chamfer-sm group hidden min-h-11 shrink-0 items-center gap-3 bg-red px-4 text-sm font-semibold whitespace-nowrap text-white transition-colors hover:bg-red-hover sm:inline-flex xl:px-5"
           >
-            {quoteCta.label}
+            {/* Entre 1024 y 1280 px la etiqueta corta evita que el botón se parta. */}
+            <span className="lg:hidden xl:inline">{quoteCta.label}</span>
+            <span className="hidden lg:inline xl:hidden">Cotizar</span>
             <Arrow />
           </Link>
           <button
