@@ -1,4 +1,5 @@
 import type { FerkorIconName } from "@/components/graphics/FerkorIcon";
+import type { ProductDrawingKey } from "@/components/graphics/ProductDrawings";
 
 export type Faq = { q: string; a: string };
 
@@ -30,6 +31,8 @@ export type Service = {
   kind?: "servicio" | "producto";
   /** En qué máquinas/aplicaciones se usa (productos). */
   uses?: { title: string; text: string }[];
+  /** Esquemas y planos referenciales a mostrar (ProductDrawings). */
+  drawings?: ProductDrawingKey[];
   /** Título y descripción SEO con los términos que busca el cliente. */
   seo?: { title: string; description: string };
 };

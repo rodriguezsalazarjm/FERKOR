@@ -74,6 +74,12 @@ src/
 
 Las fotos del cliente (zip de oct. 2026) se recortaron con `rembg` (modelo isnet-general-use) y se compusieron sobre fondo blanco 1:1 con sombra de contacto suave. Resultado en `public/images/herramientas/*.webp` y datos en `src/content/catalog.ts`. Se descartaron fotos personales, capturas de pantalla y tomas cuyo recorte no quedó limpio (piezas sostenidas con la mano o sobre tela).
 
+### Planos y esquemas propios
+
+`src/components/graphics/ProductDrawings.tsx`: esquemas de envasadora vertical y flow pack (dónde trabaja cada pieza) y planos referenciales de cuchillo zigzag, cuchillo dentado, rodamiento de fricción y correa de arrastre. Se muestran en las páginas de producto ("Cómo funciona"). No son planos de fabricación.
+
+Búsqueda de fotos en internet (oct. 2026): no se encontraron imágenes con licencia libre de estos productos específicos; las de catálogos de fabricantes tienen derechos y mostrarlas como productos de FERKOR sería engañoso. Las fotos débiles del cliente se mejoraron (color, contraste, nitidez) sin alterar la pieza.
+
 ## Fotografía provisional
 
 Las fotos de ambiente (no los productos) vienen de `images.unsplash.com` (licencia Unsplash) y se cargan desde su CDN vía `next/image` (`remotePatterns` en `next.config.ts`). **No son trabajos ni instalaciones de FERKOR.** Al recibir fotografía propia, reemplazar en `src/content/images.ts`, marcar `provisional: false` y quitar el dominio de `next.config.ts`.

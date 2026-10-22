@@ -66,4 +66,4 @@ export const catalog: CatalogItem[] = [
 ];
 
 /** Selección para la home: una muestra variada de familias. */
-export const featuredRefs = ["FK-ZZ-01", "FK-DE-03", "FK-DE-01", "FK-DE-04", "FK-RP-01", "FK-CO-01", "FK-CI-03", "FK-ME-01"];
+export const featuredRefs = ["FK-ZZ-01", "FK-DE-03", "FK-DE-01", "FK-RE-01", "FK-RP-01", "FK-CO-01", "FK-CI-03", "FK-ME-01"];

@@ -12,6 +12,7 @@ export const products: Service[] = [
   {
     kind: "producto",
     slug: "cuchillos-dentados-envasadora",
+    drawings: ["vffs", "dentado"],
     href: "/productos/cuchillos-dentados-envasadora",
     code: "PR-01",
     need: "Para envasadoras y selladoras",
@@ -33,7 +34,7 @@ export const products: Service[] = [
       { title: "Afilado y rectificación", text: "Recuperamos el filo de tus cuchillos cuando la pieza lo permite." },
       { title: "Reposición", text: "Te ayudamos a tener cuchillos de recambio para no detener la línea." },
     ],
-    catalogRefs: ["FK-DE-03", "FK-DE-01", "FK-DE-04", "FK-DE-05", "FK-DE-06"],
+    catalogRefs: ["FK-DE-03", "FK-DE-01", "FK-DE-04", "FK-ZZ-01"],
     quoteNeeds: [
       "Fotografía del cuchillo, ojalá con una huincha al lado",
       "Marca o tipo de envasadora, si lo sabes",
@@ -65,6 +66,7 @@ export const products: Service[] = [
   {
     kind: "producto",
     slug: "cuchillos-zigzag-flow-pack",
+    drawings: ["flowpack", "zigzag"],
     href: "/productos/cuchillos-zigzag-flow-pack",
     code: "PR-02",
     need: "Para máquinas flow pack",
@@ -118,6 +120,7 @@ export const products: Service[] = [
   {
     kind: "producto",
     slug: "rodamientos-lineales",
+    drawings: ["rodamiento"],
     href: "/productos/rodamientos-lineales",
     code: "PR-03",
     need: "Repuestos para envasadoras",
@@ -160,6 +163,7 @@ export const products: Service[] = [
   {
     kind: "producto",
     slug: "correas-de-arrastre",
+    drawings: ["vffs", "correa"],
     href: "/productos/correas-de-arrastre",
     code: "PR-04",
     need: "Repuestos para envasadoras",
