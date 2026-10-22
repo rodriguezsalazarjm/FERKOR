@@ -10,7 +10,11 @@ const nextConfig: NextConfig = {
     qualities: [70, 80],
   },
   async redirects() {
-    return [{ source: "/servicios/soluciones-a-medida", destination: "/servicios/mecanizado-y-repuestos", permanent: true }];
+    return [
+      { source: "/servicios/soluciones-a-medida", destination: "/servicios/mecanizado-y-repuestos", permanent: true },
+      { source: "/servicios/herramientas-envasado", destination: "/productos/cuchillos-dentados-envasadora", permanent: true },
+      { source: "/trabajos", destination: "/productos#catalogo", permanent: false },
+    ];
   },
   turbopack: {
     rules: {

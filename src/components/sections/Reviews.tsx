@@ -5,7 +5,7 @@ import { SectionLabel } from "@/components/ui/SectionLabel";
  * Reseñas de clientes reales. No se renderiza hasta tener al menos MIN_REVIEWS
  * en `src/content/reviews.ts`: nunca mostrar testimonios de relleno.
  */
-export function Reviews({ index = "08" }: { index?: string }) {
+export function Reviews({ index = "09" }: { index?: string }) {
   if (reviews.length < MIN_REVIEWS) return null;
   const [lead, ...rest] = reviews;
   return (

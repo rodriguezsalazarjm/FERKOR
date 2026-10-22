@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { industries } from "@/content/industries";
 import { allServices } from "@/content/services";
+import { products } from "@/content/products";
 import { Button } from "@/components/ui/Button";
 import { Photo } from "@/components/ui/Photo";
 import { PageHero } from "@/components/sections/inner/PageHero";
@@ -37,7 +38,7 @@ export default function IndustriasPage() {
       </PageHero>
 
       {industries.map((ind, n) => {
-        const related = allServices.filter((s) => ind.serviceSlugs.includes(s.slug));
+        const related = [...products, ...allServices].filter((s) => ind.serviceSlugs.includes(s.slug));
         const tone = n % 2 === 0 ? "bg-white" : "bg-paper";
         return (
           <section key={ind.slug} id={ind.slug} aria-labelledby={`${ind.slug}-t`} className={`scroll-mt-20 py-20 md:py-24 ${tone}`}>

@@ -15,7 +15,7 @@ export function Process() {
       <BlueprintPattern tone="blueprint" drawing="circular" titleBlock code="FK-PR-03" drawingClassName="top-[-30%] right-[-18%] h-[95%] opacity-35 lg:top-[-36%] lg:right-[-8%] lg:h-[120%]" />
 
       <div className="wrap relative">
-        <SectionLabel index="06" tone="dark">
+        <SectionLabel index="07" tone="dark">
           Cómo cotizar
         </SectionLabel>
         <h2 id="proceso-title" className="display mt-6 max-w-3xl text-[clamp(2.6rem,6vw,4.75rem)]">

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
-import Image from "next/image";
 import Link from "next/link";
-import { services, packagingLine, advisory } from "@/content/services";
+import { services, advisory } from "@/content/services";
+import { complementaryProducts } from "@/content/products";
+import { ProductImage } from "@/components/ui/ProductImage";
 import { industries } from "@/content/industries";
 import { Button, Arrow } from "@/components/ui/Button";
 import { FerkorIcon } from "@/components/graphics/FerkorIcon";
@@ -39,7 +40,7 @@ export default function ServiciosPage() {
               <li key={s.slug}>
                 <article className="group chamfer-md relative grid bg-white transition-shadow hover:shadow-[0_0_0_1px_var(--color-ink)] md:grid-cols-[minmax(0,5fr)_minmax(0,7fr)]">
                   <div className="relative aspect-[4/3] border-b border-line md:aspect-auto md:min-h-[320px] md:border-r md:border-b-0">
-                    <Image src={s.product.src} alt={s.product.alt} fill sizes="(min-width: 768px) 40vw, 100vw" quality={80} className="object-contain p-[5%] transition-transform duration-700 ease-cut group-hover:scale-[1.04]" />
+                    <ProductImage product={s.product} icon={s.icon} sizes="(min-width: 768px) 40vw, 100vw" pad="p-[5%]" />
                   </div>
                   <div className="flex flex-col p-7 md:p-10">
                     <p className="flex items-baseline gap-3">
@@ -68,8 +69,8 @@ export default function ServiciosPage() {
             ))}
           </ol>
 
-          <div className="mt-6 grid gap-px border border-line bg-line md:grid-cols-2">
-            {[packagingLine, advisory].map((s) => (
+          <div className="mt-6 grid gap-px border border-line bg-line md:grid-cols-3">
+            {[advisory, ...complementaryProducts].map((s) => (
               <ServiceLink key={s.slug} href={s.href} need={s.need} title={s.title} summary={s.summary} icon={s.icon} />
             ))}
           </div>

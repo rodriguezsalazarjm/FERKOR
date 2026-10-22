@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { site } from "@/config/site";
 import "./globals.css";
 
 // Archivos oficiales del sistema de diseño FERKOR (src/fonts).
@@ -38,21 +39,37 @@ const plexMono = localFont({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(site.url),
   title: {
-    default: "FERKOR — Soluciones de Corte Industrial | Santiago de Chile",
+    default: "Cuchillos dentados y zigzag para envasadoras y flow pack | FERKOR Santiago",
     template: "%s | FERKOR",
   },
   description:
-    "Fabricación, adaptación y rectificación de herramientas de corte industrial según los requerimientos técnicos de cada operación. Santiago de Chile.",
+    "Fabricamos y afilamos cuchillos dentados y zigzag para envasadoras, selladoras y máquinas flow pack. Rodamientos lineales y correas de arrastre. Santiago de Chile.",
+  keywords: [...site.keywords],
   applicationName: "FERKOR",
   icons: { icon: "/branding/ferkor-isotipo-rojo.svg" },
   openGraph: {
-    title: "FERKOR — Soluciones de Corte Industrial",
-    description: "Precisión para cortar. Respuesta para producir.",
+    title: "FERKOR — Cuchillos dentados y zigzag para envasadoras",
+    description: "Cuchillos para envasadoras, selladoras y flow pack. Afilado, rodamientos y correas. Santiago de Chile.",
     locale: "es_CL",
     type: "website",
+    siteName: "FERKOR",
   },
-  robots: { index: false, follow: false }, // Maqueta: no indexar hasta producción.
+  // Maqueta: no indexar hasta producción (ver src/config/site.ts).
+  robots: site.indexable ? { index: true, follow: true } : { index: false, follow: false },
+};
+
+/** Datos estructurados: solo información confirmada. */
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@type": "LocalBusiness",
+  name: "FERKOR",
+  description: "Cuchillos dentados y zigzag para envasadoras y flow pack, afilado, rodamientos lineales y correas de arrastre.",
+  url: site.url,
+  logo: `${site.url}/branding/ferkor-isotipo-rojo.svg`,
+  areaServed: { "@type": "City", name: "Santiago" },
+  address: { "@type": "PostalAddress", addressLocality: "Santiago", addressCountry: "CL" },
 };
 
 export const viewport: Viewport = {
@@ -74,6 +91,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <Footer />
+        <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       </body>
     </html>
   );

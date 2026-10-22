@@ -1,11 +1,14 @@
 import { allServices, type Service } from "@/content/services";
+import { products } from "@/content/products";
 import { Button } from "@/components/ui/Button";
 import { PageHero } from "./PageHero";
 import { BlockHeader, CatalogStrip, FaqList, IncludesList, QuoteChecklist, ServiceLink } from "./Blocks";
 
 /** Plantilla de página de servicio: problema → qué hacemos → piezas reales → cómo cotizar → FAQ → otros servicios. */
 export function ServiceDetail({ service: s }: { service: Service }) {
-  const others = allServices.filter((o) => o.slug !== s.slug);
+  const isProduct = s.kind === "producto";
+  const others = (isProduct ? [...products, ...allServices] : [...allServices, ...products]).filter((o) => o.slug !== s.slug).slice(0, 4);
+  const section = isProduct ? { label: "Productos", href: "/productos" } : { label: "Servicios", href: "/servicios" };
   return (
     <>
       <PageHero
@@ -14,27 +17,51 @@ export function ServiceDetail({ service: s }: { service: Service }) {
         title={s.headline[0]}
         accent={s.headline[1]}
         lead={s.intro}
-        trail={[{ label: "Servicios", href: "/servicios" }]}
+        trail={[section]}
         product={s.product}
         actions={
           <>
             <Button href={`/contacto?servicio=${encodeURIComponent(s.title)}`} size="lg" arrow>
-              Cotizar {s.title.toLowerCase()}
+              {isProduct ? "Cotizar con una foto" : `Cotizar ${s.title.toLowerCase()}`}
             </Button>
-            <Button href="#piezas" variant="contorno-claro" size="lg">
-              Ver piezas reales
-            </Button>
+            {s.catalogRefs.length > 0 && (
+              <Button href="#piezas" variant="contorno-claro" size="lg">
+                Ver piezas reales
+              </Button>
+            )}
           </>
         }
       >
         <p className="mono-index mt-8 text-steel-light">
-          Para quien dice: <span className="text-white">“{s.need}”</span>
+          {isProduct ? (
+            <span className="text-white">{s.need}</span>
+          ) : (
+            <>
+              Para quien dice: <span className="text-white">“{s.need}”</span>
+            </>
+          )}
         </p>
       </PageHero>
 
+      {s.uses && (
+        <section className="border-b border-line bg-white pt-20 md:pt-28">
+          <div className="wrap">
+            <BlockHeader index="00" label="Dónde se usa" title="¿En qué máquina" accent="trabaja?" />
+            <ul className="mt-12 grid gap-px border border-line bg-line md:grid-cols-3">
+              {s.uses.map((u) => (
+                <li key={u.title} className="bg-paper p-7">
+                  <h3 className="font-display text-2xl leading-none font-extrabold text-ink uppercase">{u.title}</h3>
+                  <p className="mt-2 text-ink/70">{u.text}</p>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </section>
+      )}
+
       <section className="bg-white py-20 md:py-28">
         <div className="wrap">
-          <BlockHeader index="01" label="Qué hacemos" title="Qué incluye" accent="este servicio." />
+          <BlockHeader index="01" label="Qué hacemos" title={isProduct ? "Qué te" : "Qué incluye"} accent={isProduct ? "ofrecemos." : "este servicio."} />
           <div className="mt-12 md:mt-16">
             <IncludesList items={s.includes} />
           </div>
@@ -55,7 +82,7 @@ export function ServiceDetail({ service: s }: { service: Service }) {
               <CatalogStrip refs={s.catalogRefs} />
             </div>
             <div className="mt-8 flex justify-end">
-              <Button href="/trabajos" variant="texto" arrow>
+              <Button href="/productos#catalogo" variant="texto" arrow>
                 Ver catálogo completo
               </Button>
             </div>
@@ -84,7 +111,7 @@ export function ServiceDetail({ service: s }: { service: Service }) {
 
       <section className="border-t border-line bg-paper py-20 md:py-24">
         <div className="wrap">
-          <BlockHeader index="04" label="Otros servicios" title="También" accent="te podemos ayudar con." />
+          <BlockHeader index="04" label={isProduct ? "Más productos y servicios" : "Otros servicios"} title="También" accent="te podemos ayudar con." />
           <div className="mt-12 grid gap-px border border-line bg-line md:grid-cols-2">
             {others.map((o) => (
               <ServiceLink key={o.slug} href={o.href} need={o.need} title={o.title} summary={o.summary} icon={o.icon} />

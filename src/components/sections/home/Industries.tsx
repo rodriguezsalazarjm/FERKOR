@@ -16,7 +16,7 @@ export function Industries() {
       <div className="wrap">
         <div className="flex flex-col gap-8 md:flex-row md:items-end md:justify-between">
           <div>
-            <SectionLabel index="04">Industrias</SectionLabel>
+            <SectionLabel index="05">Industrias</SectionLabel>
             <h2 id="industrias-title" className="display mt-6 text-[clamp(2.6rem,6vw,4.75rem)] text-ink">
               Donde el corte{" "}
               <span className="block text-red">no puede fallar.</span>

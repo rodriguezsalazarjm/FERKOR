@@ -9,7 +9,7 @@ export function Differentials() {
       <div className="wrap grid gap-12 lg:grid-cols-12 lg:gap-8">
         <div className="lg:col-span-5">
           <div className="lg:sticky lg:top-32">
-            <SectionLabel index="07">Por qué FERKOR</SectionLabel>
+            <SectionLabel index="08">Por qué FERKOR</SectionLabel>
             <h2 id="dif-title" className="display mt-6 text-[clamp(2.6rem,4.4vw,3.9rem)] text-ink">
               Tus requerimientos técnicos,{" "}
               <span className="block text-red">nuestra prioridad.</span>

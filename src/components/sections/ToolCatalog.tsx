@@ -8,7 +8,7 @@ import { ProductTile } from "@/components/ui/ProductTile";
 export function ToolCatalog() {
   const [active, setActive] = useState<CatalogCategoryId | "todas">("todas");
   const items = active === "todas" ? catalog : catalog.filter((i) => i.category === active);
-  const filters = [{ id: "todas" as const, label: "Todas" }, ...catalogCategories.map((c) => ({ id: c.id, label: c.label }))];
+  const filters = [{ id: "todas" as const, label: "Todas" }, ...catalogCategories.filter((c) => catalog.some((i) => i.category === c.id)).map((c) => ({ id: c.id, label: c.label }))];
 
   return (
     <div>

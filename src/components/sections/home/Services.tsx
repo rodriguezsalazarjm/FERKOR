@@ -1,6 +1,7 @@
 import Link from "next/link";
-import Image from "next/image";
-import { services, packagingLine, advisory, type Service } from "@/content/services";
+import { services, advisory, type Service } from "@/content/services";
+import { complementaryProducts } from "@/content/products";
+import { ProductImage } from "@/components/ui/ProductImage";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Arrow } from "@/components/ui/Button";
 import { FerkorIcon } from "@/components/graphics/FerkorIcon";
@@ -8,11 +9,11 @@ import { FerkorIcon } from "@/components/graphics/FerkorIcon";
 /** Servicios presentados como "puertas de entrada" según la necesidad del cliente. */
 export function Services() {
   return (
-    <section id="servicios" aria-labelledby="servicios-title" className="relative scroll-mt-20 bg-paper py-20 md:py-28 lg:py-32">
+    <section id="servicios" aria-labelledby="servicios-title" className="relative scroll-mt-20 bg-white py-20 md:py-28 lg:py-32">
       <div className="wrap">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <SectionLabel index="01">Servicios</SectionLabel>
+            <SectionLabel index="02">Servicios</SectionLabel>
             <h2 id="servicios-title" className="display mt-6 text-[clamp(2.6rem,6vw,4.75rem)] text-ink">
               ¿Qué necesitas{" "}
               <span className="block text-red">resolver hoy?</span>
@@ -32,8 +33,8 @@ export function Services() {
           ))}
         </ol>
 
-        <div className="mt-6 grid gap-px bg-white/10 md:grid-cols-2">
-          {[packagingLine, advisory].map((s) => (
+        <div className="mt-6 grid gap-px bg-white/10 md:grid-cols-3">
+          {[advisory, ...complementaryProducts].map((s) => (
             <Link
               key={s.slug}
               href={s.href}
@@ -56,20 +57,13 @@ export function Services() {
 
 function NeedCard({ service: s, n }: { service: Service; n: number }) {
   return (
-    <article className="group chamfer-md relative flex h-full flex-col bg-white transition-shadow duration-300 hover:shadow-[0_0_0_1px_var(--color-ink)]">
+    <article className="group relative flex h-full flex-col bg-white shadow-[0_0_0_1px_var(--color-line)] transition-shadow duration-300 hover:shadow-[0_0_0_1px_var(--color-ink)]">
       <p className="flex items-baseline gap-3 border-b border-line px-6 py-4 md:px-7">
         <span className="font-mono text-xs font-semibold text-red">{String(n).padStart(2, "0")}</span>
         <span className="font-display text-xl leading-none font-bold text-ink uppercase">“{s.need}”</span>
       </p>
       <div className="relative aspect-[4/3] overflow-hidden border-b border-line bg-white">
-        <Image
-          src={s.product.src}
-          alt={s.product.alt}
-          fill
-          sizes="(min-width: 1024px) 33vw, 100vw"
-          quality={80}
-          className="object-contain p-[4%] transition-transform duration-700 ease-cut group-hover:scale-[1.04]"
-        />
+        <ProductImage product={s.product} icon={s.icon} sizes="(min-width: 1024px) 33vw, 100vw" />
       </div>
       <div className="flex flex-1 flex-col p-6 md:p-7">
         <div className="flex items-start justify-between gap-4">

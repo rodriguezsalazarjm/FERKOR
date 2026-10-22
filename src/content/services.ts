@@ -11,8 +11,8 @@ export type Service = {
   title: string;
   summary: string;
   icon: FerkorIconName;
-  /** Fotografía real de producto (fondo blanco). */
-  product: { src: string; alt: string };
+  /** Fotografía real de producto (fondo blanco). Opcional: sin foto se muestra un placeholder técnico. */
+  product?: { src: string; alt: string };
   /** Titular de la página de detalle: línea en negro + remate en rojo. */
   headline: [string, string];
   intro: string;
@@ -26,6 +26,12 @@ export type Service = {
   /** Etiquetas cortas para tarjetas. */
   tags: string[];
   priority?: boolean;
+  /** "producto" para las líneas de productos (src/content/products.ts). */
+  kind?: "servicio" | "producto";
+  /** En qué máquinas/aplicaciones se usa (productos). */
+  uses?: { title: string; text: string }[];
+  /** Título y descripción SEO con los términos que busca el cliente. */
+  seo?: { title: string; description: string };
 };
 
 const img = (id: string) => `/images/herramientas/${id}.webp`;
@@ -52,7 +58,7 @@ export const services: Service[] = [
       { title: "Tipo guillotina", text: "Cuchillos rectos de gran longitud para corte por presión." },
       { title: "Picado y prepicado", text: "Cuchillos para perforar o prepicar film, papel y empaques." },
     ],
-    catalogRefs: ["FK-DE-01", "FK-CI-03", "FK-DE-02", "FK-RE-01", "FK-CI-01", "FK-DE-03", "FK-RE-03", "FK-DE-04"],
+    catalogRefs: ["FK-DE-01", "FK-CI-03", "FK-ZZ-01", "FK-RE-01", "FK-CI-01", "FK-DE-03", "FK-RE-03", "FK-DE-04"],
     quoteNeeds: [
       "Plano, muestra o fotografías del cuchillo",
       "Medidas principales (largo, ancho, espesor o diámetro)",
@@ -93,7 +99,7 @@ export const services: Service[] = [
       { title: "Rectificado", text: "Corregimos superficies y geometría para devolver la precisión de montaje." },
       { title: "Alternativa de reposición", text: "Si la pieza no es recuperable, te cotizamos una nueva." },
     ],
-    catalogRefs: ["FK-CI-01", "FK-CI-04", "FK-DE-02", "FK-RE-02"],
+    catalogRefs: ["FK-CI-01", "FK-CI-04", "FK-ZZ-01", "FK-RE-02"],
     quoteNeeds: [
       "Fotografías del cuchillo y de su filo",
       "Medidas principales",
@@ -121,22 +127,21 @@ export const services: Service[] = [
     slug: "mecanizado-y-repuestos",
     href: "/servicios/mecanizado-y-repuestos",
     code: "FK-03",
-    need: "Necesito una pieza o repuesto",
-    title: "Mecanizado y repuestos",
-    summary: "Ejes, piñones, resortes y piezas a medida, más correas de arrastre y rodamientos para tus equipos.",
+    need: "Necesito una pieza a medida",
+    title: "Mecanizado de piezas",
+    summary: "Ejes, piñones, resortes y piezas a medida por electroerosión, fresado y torno.",
     icon: "materiales",
     product: { src: img("9d328c"), alt: "Piñón mecanizado" },
-    headline: ["Piezas mecanizadas", "y repuestos para tu línea."],
+    headline: ["Piezas mecanizadas", "para tu línea."],
     intro:
-      "Complementamos la fabricación de herramientas de corte con mecanizado de piezas industriales y suministro de repuestos. Trabajamos según los requerimientos de cada cliente, a partir de una pieza existente o de un plano.",
+      "Complementamos la fabricación de herramientas de corte con mecanizado de piezas industriales. Trabajamos según los requerimientos de cada cliente, a partir de una pieza existente o de un plano.",
     includes: [
       { title: "Ejes y piñones", text: "Piezas mecanizadas según medida o muestra." },
       { title: "Resortes", text: "Fabricación según especificación." },
       { title: "Electroerosión, fresado y torno", text: "Procesos para piezas a medida y tornería en general." },
-      { title: "Correas de arrastre", text: "Para equipos de envasado y transporte." },
-      { title: "Rodamientos", text: "De carro, de bolas y de fricción." },
+      { title: "Copia de piezas", text: "Reproducimos piezas existentes a partir de una muestra." },
     ],
-    catalogRefs: ["FK-ME-01", "FK-ME-02", "FK-ME-03", "FK-ME-04", "FK-RP-01", "FK-RP-02", "FK-RP-03", "FK-RP-04"],
+    catalogRefs: ["FK-ME-01", "FK-ME-02", "FK-ME-03", "FK-ME-04", "FK-ME-05", "FK-ME-06", "FK-ME-08", "FK-ME-09"],
     quoteNeeds: ["Pieza de muestra, plano o fotografías con medidas", "Material, si lo conoces", "Cantidad requerida"],
     faqs: [
       {
@@ -144,59 +149,20 @@ export const services: Service[] = [
         a: "Podemos evaluarla a partir de la pieza existente: levantamos medidas, elaboramos el plano y te proponemos su fabricación.",
       },
       {
-        q: "¿Venden repuestos estándar?",
-        a: "Suministramos correas de arrastre y rodamientos de carro, de bolas y de fricción. Indícanos la referencia o envíanos una foto de la pieza.",
+        q: "¿Venden rodamientos y correas?",
+        a: "Sí: rodamientos lineales, de carro, de bolas y de fricción, y correas de arrastre. Los encuentras en Productos.",
       },
     ],
-    tags: ["Ejes", "Piñones", "Resortes", "Rodamientos", "Correas"],
+    tags: ["Ejes", "Piñones", "Resortes", "Electroerosión", "Torno"],
   },
 ];
-
-/** Línea especializada (sector principal). */
-export const packagingLine: Service = {
-  slug: "herramientas-envasado",
-  href: "/servicios/herramientas-envasado",
-  code: "FK-04",
-  need: "Tengo una envasadora",
-  title: "Cuchillos para envasadoras",
-  summary: "Cuchillos lisos, dentados y zigzag para envasadoras flow pack, verticales y líneas de empaque.",
-  icon: "herramientas",
-  product: { src: img("107800"), alt: "Cuchillo recto de dentado zigzag para envasadora" },
-  headline: ["Cuchillos para", "envasadoras flow pack."],
-  intro:
-    "El envasado es nuestro sector principal. Fabricamos y recuperamos los cuchillos que cortan tus empaques: lisos, dentados y zigzag, además de cuchillos de picado y prepicado.",
-  includes: [
-    { title: "Cuchillos zigzag flow pack", text: "Dentado para corte de film en envasadoras horizontales." },
-    { title: "Cuchillos lisos", text: "Rectos y circulares para corte limpio de film y empaques." },
-    { title: "Picado y prepicado", text: "Para perforar el empaque y facilitar su apertura." },
-    { title: "Afilado y rectificación", text: "Recuperamos los cuchillos de tu envasadora cuando es viable." },
-  ],
-  catalogRefs: ["FK-DE-02", "FK-DE-03", "FK-DE-01", "FK-RE-01"],
-  quoteNeeds: [
-    "Marca y modelo de la envasadora, si lo conoces",
-    "Fotografía del cuchillo actual o del portacuchillo",
-    "Medidas y tipo de dentado",
-    "Cantidad requerida",
-  ],
-  faqs: [
-    {
-      q: "¿Trabajan con cualquier marca de envasadora?",
-      a: "Evaluamos cada caso a partir del cuchillo actual o de sus medidas. Con una muestra o fotografías podemos revisar si es posible fabricarlo.",
-    },
-    {
-      q: "Mi cuchillo zigzag corta mal, ¿qué hago?",
-      a: "Envíanos fotografías del filo y del empaque cortado. Evaluamos si corresponde afilar, rectificar o reemplazar la pieza.",
-    },
-  ],
-  tags: ["Flow pack", "Zigzag", "Liso", "Prepicado"],
-};
 
 /** Asesoría técnica: transversal a todos los servicios. */
 export const advisory: Service = {
   slug: "asesoria-tecnica",
   href: "/servicios/asesoria-tecnica",
-  code: "FK-05",
-  need: "No sé exactamente qué necesito",
+  code: "FK-04",
+  need: "No sé qué pieza necesito",
   title: "Asesoría técnica",
   summary: "Planos técnicos, visitas a tu planta, levantamiento de medidas en terreno y asesoría online.",
   icon: "planos",
@@ -221,10 +187,10 @@ export const advisory: Service = {
   tags: ["Planos", "Visitas", "Medición en terreno", "Online"],
 };
 
-export const allServices: Service[] = [...services, packagingLine, advisory];
+export const allServices: Service[] = [...services, advisory];
 
 export function getService(slug: string) {
   return allServices.find((s) => s.slug === slug);
 }
 
-export const specialties = ["Cuchillos a medida", "Afilado y rectificación", "Mecanizado y repuestos", "Asesoría técnica"];
+export const specialties = ["Cuchillos dentados", "Cuchillos zigzag flow pack", "Rodamientos y correas", "Afilado y rectificación"];

@@ -7,10 +7,11 @@ import { TechnicalGrid } from "@/components/graphics/TechnicalGrid";
 import { CircularBladeDrawing, TitleBlock } from "@/components/graphics/TechnicalDrawings";
 import { CutGeometry } from "@/components/graphics/CutGeometry";
 
-const heroIndustries = [
-  { slug: "envasado", label: "Envasado flow pack" },
-  { slug: "alimentos", label: "Alimentos" },
-  { slug: "papel", label: "Papel y cartón" },
+const heroLinks = [
+  { href: "/productos/cuchillos-dentados-envasadora", label: "Cuchillos dentados" },
+  { href: "/productos/cuchillos-zigzag-flow-pack", label: "Zigzag flow pack" },
+  { href: "/productos/rodamientos-lineales", label: "Rodamientos" },
+  { href: "/productos/correas-de-arrastre", label: "Correas" },
 ];
 
 export function Hero() {
@@ -35,31 +36,30 @@ export function Hero() {
           </p>
 
           <h1 id="hero-title" className="display mt-7 text-[clamp(3rem,11.5vw,4.25rem)] font-black md:text-[clamp(4.25rem,9vw,5.75rem)] lg:text-[clamp(3rem,5.5vw,6rem)]">
-            <span className="block">Cuchillos industriales</span>{" "}
-            <span className="block">a medida.</span>{" "}
-            <span className="mt-[0.06em] block text-red">Afilado y rectificado.</span>
+            <span className="block">Cuchillos dentados</span>{" "}
+            <span className="block">y zigzag</span>{" "}
+            <span className="mt-[0.06em] block text-red">para envasadoras.</span>
           </h1>
 
           <p className="mt-7 max-w-[34rem] text-lg leading-relaxed text-white/85 md:text-xl md:leading-[1.55]">
-            Fabricamos y recuperamos cuchillos para envasadoras flow pack, alimentos y papel en {company.city}. Envíanos
-            una foto, plano o muestra y te cotizamos.
+            Fabricamos y afilamos los cuchillos de tus envasadoras, selladoras y máquinas flow pack, más rodamientos y
+            correas de arrastre. Envíanos una foto y te cotizamos en {company.city}.
           </p>
 
           <div className="mt-9 flex flex-col gap-3 xs:flex-row xs:flex-wrap">
             <Button href="/contacto" size="lg" arrow>
-              Cotizar con foto o plano
+              Cotizar con una foto
             </Button>
-            <Button href="/servicios" variant="contorno-claro" size="lg">
-              Ver servicios
+            <Button href="/productos" variant="contorno-claro" size="lg">
+              Ver productos
             </Button>
           </div>
 
-          <nav aria-label="Industrias" className="mt-9 flex flex-wrap items-center gap-x-1 gap-y-2 text-sm">
-            <span className="mono-index mr-2 text-steel-light">Para</span>
-            {heroIndustries.map((i, n) => (
-              <span key={i.slug} className="flex items-center gap-1">
+          <nav aria-label="Productos" className="mt-9 flex flex-wrap items-center gap-x-1 gap-y-2 text-sm">
+            {heroLinks.map((i, n) => (
+              <span key={i.href} className="flex items-center gap-1">
                 {n > 0 && <span className="text-white/30" aria-hidden="true">/</span>}
-                <Link href={`/industrias#${i.slug}`} className="px-1.5 py-1 font-medium text-white/85 underline-offset-4 hover:text-white hover:underline">
+                <Link href={i.href} className="px-1.5 py-1 font-medium text-white/85 underline-offset-4 hover:text-white hover:underline">
                   {i.label}
                 </Link>
               </span>

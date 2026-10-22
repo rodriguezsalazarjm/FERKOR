@@ -11,7 +11,7 @@ export function Works() {
       <div className="wrap">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <SectionLabel index="02">Trabajos reales</SectionLabel>
+            <SectionLabel index="03">Trabajos reales</SectionLabel>
             <h2 id="trabajos-title" className="display mt-6 text-[clamp(2.6rem,6vw,4.75rem)] text-ink">
               Herramientas reales,{" "}
               <span className="block text-red">hechas a medida.</span>
@@ -35,7 +35,7 @@ export function Works() {
           <p className="font-mono text-xs text-steel">
             {catalog.length} referencias fotografiadas · catálogo en ampliación
           </p>
-          <Link href="/trabajos" className="group inline-flex items-center gap-3 text-sm font-semibold text-ink hover:text-red">
+          <Link href="/productos#catalogo" className="group inline-flex items-center gap-3 text-sm font-semibold text-ink hover:text-red">
             Ver catálogo completo <Arrow />
           </Link>
         </div>

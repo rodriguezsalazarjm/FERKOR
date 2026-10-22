@@ -51,6 +51,10 @@ src/
 
 | Dato / recurso | Dónde se completa | Estado en la web |
 | --- | --- | --- |
+| Fotos de correas de arrastre y más modelos de dentados/zigzag (Google Drive del cliente) | `public/images/herramientas` + `catalog.ts` | Correas sin foto ("Foto pendiente") |
+| Validar qué modelos son dentados y cuáles zigzag | `src/content/catalog.ts` | Solo FK-ZZ-01 marcado como zigzag |
+| Dominio definitivo y activar indexación | `src/config/site.ts` (`url`, `indexable`) | robots.txt bloquea y páginas en noindex |
+| Google Business Profile (SEO local + reseñas) | `src/content/reviews.ts` → `googleReviewsUrl` | Pendiente |
 | Reseñas de clientes reales (mín. 3, con autorización) | `src/content/reviews.ts` | La sección no se muestra hasta tener 3 |
 | Plazo de respuesta que puedan cumplir (ej. 24 h hábiles) | textos de Contacto / Proceso | No se promete plazo |
 | Confirmar si fabrican en taller propio o aliado | `src/app/nosotros/page.tsx` | Textos neutros ("fabricamos", según documento del cliente) |

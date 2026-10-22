@@ -37,7 +37,7 @@ export function Rectification() {
         <div className="relative px-4 py-16 sm:px-8 md:px-12 md:py-24 lg:py-28 xl:px-20">
           <TechnicalGrid className="text-white/[0.04]" minor={16} major={80} />
           <div className="relative max-w-xl">
-            <SectionLabel index="03" tone="dark">
+            <SectionLabel index="04" tone="dark">
               Rectificación y afilado
             </SectionLabel>
             <h2 id="rect-title" className="display mt-6 text-[clamp(2.8rem,6.4vw,5.25rem)] font-black">
