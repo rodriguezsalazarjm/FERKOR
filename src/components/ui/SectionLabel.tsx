@@ -10,12 +10,12 @@ export function SectionLabel({ index, children, tone = "light", className = "" }
   const color = tone === "dark" ? "text-white" : "text-ink";
   const indexColor = tone === "dark" ? "text-red-light" : "text-red";
   return (
-    <div className={`inline-flex flex-col gap-3 ${className}`}>
+    <div className={`section-label inline-flex flex-col gap-3 ${className}`}>
       <p className={`eyebrow flex items-baseline gap-2 ${color}`}>
         {index && <span className={`font-mono font-semibold tracking-[0.08em] ${indexColor}`}>{index} /</span>}
         <span>{children}</span>
       </p>
-      <span className="block h-0.5 w-8 bg-red" aria-hidden="true" />
+      <span className="rule-grow block h-0.5 w-8 bg-red" aria-hidden="true" />
     </div>
   );
 }

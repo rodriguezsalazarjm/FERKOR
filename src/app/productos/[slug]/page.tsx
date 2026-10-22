@@ -3,6 +3,9 @@ import { notFound } from "next/navigation";
 import { products, getProduct } from "@/content/products";
 import { ServiceDetail } from "@/components/sections/inner/ServiceDetail";
 
+// Rutas 100% estáticas (generateStaticParams): no requieren validación de navegación instantánea.
+export const instant = false;
+
 export function generateStaticParams() {
   return products.map((p) => ({ slug: p.slug }));
 }

@@ -8,7 +8,7 @@ export function ProductLineCard({ product: p, size = "md" }: { product: Service;
   const lg = size === "lg";
   return (
     <article
-      className={`group chamfer-md relative grid h-full bg-white transition-shadow duration-300 hover:shadow-[0_0_0_1px_var(--color-ink)] ${
+      className={`lift group chamfer-md relative grid h-full bg-white transition-shadow duration-300 hover:shadow-[0_0_0_1px_var(--color-ink)] ${
         lg ? "" : "sm:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]"
       }`}
     >

@@ -16,6 +16,7 @@ function isActive(pathname: string, href: string) {
 export function Header() {
   const pathname = usePathname();
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   // El menú queda abierto solo en la ruta donde se abrió: al navegar se cierra solo.
   const [openOn, setOpenOn] = useState<string | null>(null);
   const open = openOn === pathname;
@@ -23,7 +24,16 @@ export function Header() {
   const panelRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 24);
+    // Se oculta al bajar y reaparece al subir (más espacio de lectura en móvil).
+    let last = window.scrollY;
+    const onScroll = () => {
+      const y = window.scrollY;
+      setScrolled(y > 24);
+      if (Math.abs(y - last) > 6) {
+        setHidden(y > 160 && y > last);
+        last = y;
+      }
+    };
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -48,6 +58,7 @@ export function Header() {
   }, [open]);
 
   // Sin backdrop-filter con el menú abierto: crearía un contenedor para el panel `fixed`.
+  const isHidden = hidden && !open;
   const surface = open
     ? "border-white/10 bg-ink"
     : scrolled
@@ -55,7 +66,11 @@ export function Header() {
       : "border-transparent bg-ink";
 
   return (
-    <header className={`on-dark sticky top-0 z-50 border-b transition-[background-color,border-color] duration-300 ${surface}`}>
+    <header
+      className={`on-dark sticky top-0 z-50 border-b transition-[background-color,border-color,transform] duration-300 ease-cut ${surface} ${isHidden ? "header-hidden" : ""}`}
+      onFocusCapture={() => setHidden(false)}
+    >
+      <span className="scroll-progress pointer-events-none absolute inset-x-0 -bottom-px hidden h-0.5 bg-red" aria-hidden="true" />
       <div className="wrap flex h-16 items-center justify-between gap-6 lg:h-[76px]">
         <Link href="/" className="shrink-0" aria-label="FERKOR, ir al inicio">
           <Logo variant="wordmark-blanco" height={24} className="lg:hidden" />
@@ -93,7 +108,7 @@ export function Header() {
           <Link
             href={quoteCta.href}
             aria-label={quoteCta.label}
-            className="chamfer-sm group hidden min-h-11 shrink-0 items-center gap-3 bg-red px-4 text-sm font-semibold whitespace-nowrap text-white transition-colors hover:bg-red-hover sm:inline-flex xl:px-5"
+            className="btn-sweep chamfer-sm group hidden min-h-11 shrink-0 items-center gap-3 bg-red px-4 text-sm font-semibold whitespace-nowrap text-white transition-colors hover:bg-red-hover sm:inline-flex xl:px-5"
           >
             {/* Entre 1024 y 1280 px la etiqueta corta evita que el botón se parta. */}
             <span className="lg:hidden xl:inline">{quoteCta.label}</span>

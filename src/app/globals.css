@@ -161,3 +161,249 @@
     filter: grayscale(1) contrast(1.12) brightness(0.92);
   }
 }
+
+/* =====================================================================
+   Sistema de movimiento FERKOR
+   Principio: movimiento técnico y preciso (cortes, trazos, cotas), nunca
+   decorativo en exceso. Todo se desactiva con prefers-reduced-motion.
+   - Reveal al hacer scroll: CSS scroll-driven (animation-timeline: view()).
+   - Entradas de carga: hero (.hero-line, .hero-in).
+   ===================================================================== */
+
+:root {
+  --ease-cut: cubic-bezier(0.2, 0.7, 0.1, 1);
+}
+
+/* Reveal al hacer scroll: 100% CSS (scroll-driven animations), sin JS ni riesgo de
+   hidratación. Navegadores sin soporte muestran todo sin animación. */
+@supports (animation-timeline: view()) {
+  @keyframes reveal-up {
+    from {
+      opacity: 0;
+      transform: translate3d(0, 34px, 0);
+    }
+  }
+  @keyframes reveal-fade {
+    from {
+      opacity: 0;
+    }
+  }
+  @keyframes grow {
+    from {
+      transform: scaleX(0);
+    }
+  }
+  :where(main section h2, main section h2 ~ p, main .section-label, main ol > li, main ul.grid > li, main dl > div, main details, main article:not(.lift)):not([data-no-reveal] *):not(.pop) {
+    animation: reveal-up linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 75%;
+  }
+  /* Escalonado por posición (aprox. del stagger con la línea de tiempo) */
+  :where(main ol > li, main ul.grid > li, main dl > div):nth-child(3n + 2):not([data-no-reveal] *) {
+    animation-range: entry 8% entry 85%;
+  }
+  :where(main ol > li, main ul.grid > li, main dl > div):nth-child(3n + 3):not([data-no-reveal] *) {
+    animation-range: entry 16% entry 95%;
+  }
+  /* Tarjetas con elevación al hover: solo opacidad para no pisar el transform */
+  main .lift {
+    animation: reveal-fade linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 70%;
+  }
+  /* Dibujos técnicos: se "plotean" de izquierda a derecha */
+  main figure:has(svg) svg {
+    animation: plot linear both;
+    animation-timeline: view();
+    animation-range: entry 15% cover 45%;
+  }
+  .section-label .rule-grow {
+    animation: grow linear both;
+    animation-timeline: view();
+    animation-range: entry 30% cover 30%;
+    transform-origin: left center;
+  }
+  .grow-x {
+    animation: grow linear both;
+    animation-timeline: view();
+    animation-range: entry 20% cover 50%;
+    transform-origin: left center;
+  }
+}
+
+/* Entrada de página */
+@keyframes page-enter {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 12px, 0);
+  }
+}
+.page-enter {
+  animation: page-enter 0.5s var(--ease-cut) both;
+}
+
+/* Hero: líneas del titular que suben desde un corte */
+@keyframes rise {
+  from {
+    transform: translate3d(0, 108%, 0);
+  }
+}
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 18px, 0);
+  }
+}
+@keyframes cut-in {
+  from {
+    opacity: 0;
+    transform: translate3d(18%, -12%, 0);
+  }
+}
+@keyframes plot {
+  from {
+    clip-path: inset(0 100% 0 0);
+  }
+  to {
+    clip-path: inset(0 0 0 0);
+  }
+}
+@keyframes settle {
+  from {
+    transform: scale(1.08);
+  }
+}
+.hero-line {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.04em;
+  margin-bottom: -0.04em;
+}
+.hero-line > span {
+  display: block;
+  animation: rise 0.9s var(--ease-cut) both;
+  animation-delay: calc(80ms + var(--i, 0) * 90ms);
+}
+.hero-in {
+  animation: fade-up 0.9s var(--ease-cut) both;
+  animation-delay: calc(420ms + var(--i, 0) * 90ms);
+}
+.hero-cut {
+  animation: cut-in 1.2s var(--ease-cut) both 0.1s;
+}
+.hero-plot {
+  animation: plot 2.2s var(--ease-cut) both 0.6s;
+}
+.hero-settle {
+  animation: settle 2.4s var(--ease-cut) both;
+}
+
+/* Parallax suave con scroll-driven animations (mejora progresiva) */
+@supports (animation-timeline: view()) {
+  @keyframes drift {
+    from {
+      transform: translate3d(0, -6%, 0);
+    }
+    to {
+      transform: translate3d(0, 6%, 0);
+    }
+  }
+  .parallax {
+    animation: drift linear both;
+    animation-timeline: view();
+  }
+}
+
+/* Barra de progreso de lectura en el header */
+@supports (animation-timeline: scroll()) {
+  @keyframes progress {
+    from {
+      transform: scaleX(0);
+    }
+    to {
+      transform: scaleX(1);
+    }
+  }
+  .scroll-progress {
+    display: block;
+    transform-origin: left center;
+    animation: progress linear both;
+    animation-timeline: scroll(root);
+  }
+}
+
+/* Marquesina de especialidades */
+@keyframes marquee {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+.marquee {
+  animation: marquee 38s linear infinite;
+}
+.marquee-wrap:hover .marquee {
+  animation-play-state: paused;
+}
+
+/* Botón principal: destello diagonal (el "corte") al pasar el cursor */
+.btn-sweep {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+.btn-sweep::after {
+  content: "";
+  position: absolute;
+  inset: 0 auto 0 -60%;
+  width: 45%;
+  z-index: -1;
+  background: linear-gradient(105deg, transparent, rgb(255 255 255 / 0.28), transparent);
+  transform: skewX(-28deg);
+  transition: left 0.7s var(--ease-cut);
+}
+.btn-sweep:hover::after {
+  left: 120%;
+}
+
+/* Tarjetas: elevación mínima al pasar el cursor */
+.lift {
+  transition:
+    transform 0.4s var(--ease-cut),
+    box-shadow 0.3s;
+}
+.lift:hover {
+  transform: translate3d(0, -4px, 0);
+}
+
+/* Aparición de piezas del catálogo al filtrar */
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0) scale(0.98);
+  }
+}
+.pop {
+  animation: pop 0.55s var(--ease-cut) both;
+  animation-delay: calc(var(--i, 0) * 45ms);
+}
+
+/* Header que se oculta al bajar y aparece al subir */
+.header-hidden {
+  transform: translate3d(0, -100%, 0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  main *,
+  main figure svg,
+  .rule-grow,
+  .grow-x,
+  .marquee,
+  .parallax,
+  .hero-settle,
+  .hero-plot {
+    animation: none !important;
+  }
+  .header-hidden {
+    transform: none;
+  }
+}

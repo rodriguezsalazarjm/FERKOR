@@ -57,7 +57,7 @@ export function Services() {
 
 function NeedCard({ service: s, n }: { service: Service; n: number }) {
   return (
-    <article className="group relative flex h-full flex-col bg-white shadow-[0_0_0_1px_var(--color-line)] transition-shadow duration-300 hover:shadow-[0_0_0_1px_var(--color-ink)]">
+    <article className="lift group relative flex h-full flex-col bg-white shadow-[0_0_0_1px_var(--color-line)] transition-shadow duration-300 hover:shadow-[0_0_0_1px_var(--color-ink)]">
       <p className="flex items-baseline gap-3 border-b border-line px-6 py-4 md:px-7">
         <span className="font-mono text-xs font-semibold text-red">{String(n).padStart(2, "0")}</span>
         <span className="font-display text-xl leading-none font-bold text-ink uppercase">“{s.need}”</span>

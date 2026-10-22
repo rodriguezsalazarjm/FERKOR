@@ -25,7 +25,7 @@ export function Process() {
 
         <ol className="relative mt-16 grid gap-0 md:mt-24 lg:grid-cols-3">
           {/* Línea de cota que une las etapas (escritorio) */}
-          <span className="absolute top-[27px] right-0 left-0 hidden h-px bg-white/45 lg:block" aria-hidden="true" />
+          <span className="grow-x absolute top-[27px] right-0 left-0 hidden h-px bg-white/45 lg:block" aria-hidden="true" />
           <span className="absolute top-[21px] left-0 hidden h-3 w-px bg-white/70 lg:block" aria-hidden="true" />
           <span className="absolute top-[21px] right-0 hidden h-3 w-px bg-white/70 lg:block" aria-hidden="true" />
 

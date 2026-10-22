@@ -47,6 +47,14 @@ src/
 - Fotografía: B/N contrastada (`photo-grade`); el rojo lo aporta la gráfica.
 - Dibujos técnicos: SVG con trazo que no escala, cotas, ejes, achurados y cajetín "DIBUJO REFERENCIAL" para que no se confundan con planos de fabricación.
 
+## Animación
+
+Sistema en `src/app/globals.css` (sección "Sistema de movimiento"), sin librerías:
+- **Entrada:** el titular sube línea a línea desde un corte (`.hero-line`), el resto aparece en cascada (`.hero-in`), el corte rojo entra en diagonal y el plano de la cuchilla se "plotea".
+- **Scroll:** titulares, tarjetas, listas y rótulos aparecen con CSS scroll-driven animations (`animation-timeline: view()`); los planos se dibujan de izquierda a derecha; la línea de cota del proceso crece. Navegadores sin soporte muestran todo estático.
+- **Interacción:** header que se oculta al bajar y vuelve al subir, barra roja de progreso de lectura, destello diagonal en botones principales, elevación de tarjetas, marquesina de especialidades (pausa al pasar el cursor), aparición escalonada al filtrar el catálogo, contador de trayectoria y entrada suave entre páginas.
+- **Accesibilidad:** con `prefers-reduced-motion` todo queda estático.
+
 ## Pendientes del cliente
 
 | Dato / recurso | Dónde se completa | Estado en la web |

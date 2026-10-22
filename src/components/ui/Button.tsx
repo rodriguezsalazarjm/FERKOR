@@ -15,8 +15,8 @@ type Props = {
 
 const variants: Record<Variant, string> = {
   // Acción comercial principal: una por vista.
-  cotizar: "chamfer-sm bg-red text-white hover:bg-red-hover",
-  solido: "chamfer-sm bg-ink text-white hover:bg-ink-700",
+  cotizar: "btn-sweep chamfer-sm bg-red text-white hover:bg-red-hover",
+  solido: "btn-sweep chamfer-sm bg-ink text-white hover:bg-ink-700",
   contorno: "border border-ink/80 text-ink hover:bg-ink hover:text-white",
   "contorno-claro": "on-dark border border-white/60 text-white hover:border-white hover:bg-white hover:text-ink",
   texto: "px-0! text-ink underline-offset-[6px] hover:text-red hover:underline",

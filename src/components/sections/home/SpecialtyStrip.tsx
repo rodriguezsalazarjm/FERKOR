@@ -1,28 +1,25 @@
 import { specialties } from "@/content/services";
+import { CutGeometry } from "@/components/graphics/CutGeometry";
 
-/** Franja de especialización: compacta, roja, con cortes diagonales como separadores. */
+/** Franja de especialización en marquesina continua (se pausa al pasar el cursor; estática con reduced-motion). */
 export function SpecialtyStrip() {
+  const run = [...specialties, ...specialties];
   return (
-    <section aria-label="Especialidades" className="relative overflow-hidden bg-red text-white">
-      <ul className="wrap grid grid-cols-2 lg:grid-cols-4">
-        {specialties.map((s, i) => (
-          <li
-            key={s}
-            className={`relative flex items-center gap-3 py-5 lg:py-6 ${i % 2 === 1 ? "pl-4 lg:pl-0" : ""} ${
-              i > 1 ? "border-t border-white/20 lg:border-t-0" : ""
-            } ${i > 0 ? "lg:pl-8" : ""}`}
-          >
-            {i > 0 && (
-              <span
-                className={`absolute top-1/2 left-0 h-8 w-px -translate-y-1/2 rotate-[28deg] bg-white/55 ${i === 2 ? "hidden lg:block" : ""}`}
-                aria-hidden="true"
-              />
-            )}
-            <span className="font-mono text-[11px] text-white/70">{String(i + 1).padStart(2, "0")}</span>
-            <span className="font-display text-xl leading-none font-extrabold tracking-[0.01em] uppercase sm:text-2xl">{s}</span>
-          </li>
+    <section aria-label="Especialidades" className="marquee-wrap relative overflow-hidden bg-red text-white">
+      <div className="marquee flex w-max">
+        {[0, 1].map((copy) => (
+          <ul key={copy} className="flex shrink-0 items-center" aria-hidden={copy === 1 ? true : undefined}>
+            {run.map((s, i) => (
+              <li key={`${s}-${i}`} className="flex items-center gap-4 py-5 pr-10 lg:py-6 lg:pr-14">
+                <CutGeometry variant="stack" className="h-4 w-8 text-ink" />
+                <span className="font-display text-2xl leading-none font-extrabold tracking-[0.01em] whitespace-nowrap uppercase lg:text-3xl">
+                  {s}
+                </span>
+              </li>
+            ))}
+          </ul>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }

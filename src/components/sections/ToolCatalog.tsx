@@ -36,9 +36,9 @@ export function ToolCatalog() {
         {items.length} productos
       </p>
 
-      <ul className="mt-8 grid grid-cols-2 gap-px border border-line bg-line md:grid-cols-3 lg:grid-cols-4">
-        {items.map((item) => (
-          <li key={item.ref}>
+      <ul data-no-reveal className="mt-8 grid grid-cols-2 gap-px border border-line bg-line md:grid-cols-3 lg:grid-cols-4">
+        {items.map((item, i) => (
+          <li key={`${active}-${item.ref}`} className="pop" style={{ "--i": i % 12 } as React.CSSProperties}>
             <ProductTile item={item} sizes="(min-width: 1024px) 25vw, (min-width: 768px) 33vw, 50vw" className="h-full" />
           </li>
         ))}

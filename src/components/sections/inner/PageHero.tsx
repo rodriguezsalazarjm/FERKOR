@@ -51,17 +51,29 @@ export function PageHero({ index, label, title, accent, lead, trail = [], action
             {label}
           </SectionLabel>
           <h1 className="display mt-6 text-[clamp(2.9rem,7.5vw,5.75rem)] font-black">
-            {title}{" "}
-            <span className="block text-red">{accent}</span>
+            <span className="hero-line">
+              <span style={{ "--i": 0 } as React.CSSProperties}>{title}</span>
+            </span>{" "}
+            <span className="hero-line text-red">
+              <span style={{ "--i": 1 } as React.CSSProperties}>{accent}</span>
+            </span>
           </h1>
-          <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl md:leading-[1.55]">{lead}</p>
-          {actions && <div className="mt-9 flex flex-col gap-3 xs:flex-row xs:flex-wrap">{actions}</div>}
-          {children}
+          <p className="hero-in mt-6 max-w-2xl text-lg leading-relaxed text-white/80 md:text-xl md:leading-[1.55]" style={{ "--i": -1 } as React.CSSProperties}>
+            {lead}
+          </p>
+          {actions && (
+            <div className="hero-in mt-9 flex flex-col gap-3 xs:flex-row xs:flex-wrap" style={{ "--i": 0 } as React.CSSProperties}>
+              {actions}
+            </div>
+          )}
+          <div className="hero-in" style={{ "--i": 1 } as React.CSSProperties}>
+            {children}
+          </div>
         </div>
         {product && (
-          <div className="relative lg:col-span-5">
+          <div className="hero-in relative lg:col-span-5" style={{ "--i": -2 } as React.CSSProperties}>
             <div className="chamfer-lg relative aspect-square bg-white">
-              <Image src={product.src} alt={product.alt} fill priority sizes="(min-width: 1024px) 40vw, 100vw" quality={80} className="object-contain p-[5%]" />
+              <Image src={product.src} alt={product.alt} fill priority sizes="(min-width: 1024px) 40vw, 100vw" quality={80} className="hero-settle object-contain p-[5%]" />
             </div>
             <CutGeometry variant="corner" className="absolute -bottom-3 -left-3 h-16 w-16" />
           </div>
