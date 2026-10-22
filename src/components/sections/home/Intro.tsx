@@ -29,12 +29,11 @@ export function Intro() {
 
           <div className="lg:col-span-5 lg:col-start-8 lg:pt-14">
             <p className="text-xl leading-[1.55] text-ink">
-              FERKOR gestiona soluciones de corte industrial para empresas que dependen de sus herramientas para producir.
+              FERKOR se especializa en herramientas de corte para uso industrial: cuchillos y componentes para envasado, procesamiento de alimentos y transformación de papel y cartón.
             </p>
             <div className="mt-6 space-y-4 text-ink/80">
               <p>
-                Analizamos cada requerimiento a partir de planos, medidas, muestras o fotografías, y coordinamos su
-                fabricación, adaptación o rectificación con proveedores y un taller especializado aliado.
+                Complementamos la fabricación con mecanizado de piezas, suministro de repuestos industriales y apoyo técnico: elaboramos planos, visitamos tu planta y levantamos medidas en terreno.
               </p>
               <p>
                 Conocemos aceros, tratamientos térmicos y especificaciones técnicas. Y hablas directamente con quien

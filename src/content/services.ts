@@ -10,6 +10,8 @@ export type Service = {
   summary: string;
   icon: FerkorIconName;
   image: SiteImage;
+  /** Fotografía real de producto (fondo blanco) usada en las tarjetas. */
+  product: { src: string; alt: string };
   tools: string[];
   /** Línea prioritaria para el negocio (recurrencia/rentabilidad). */
   priority?: boolean;
@@ -23,20 +25,18 @@ export const services: Service[] = [
     title: "Fabricación a medida",
     short: "Fabricación",
     summary:
-      "Coordinamos la fabricación de herramientas de corte según planos, muestras, fotografías, medidas y especificaciones de tu operación.",
+      "Fabricamos herramientas de corte en diversas geometrías y configuraciones, según planos, muestras, medidas y la aplicación de cada proceso.",
     icon: "fabricacion",
     image: images.fabricacion,
+    product: { src: "/images/herramientas/47eca6.webp", alt: "Cuchillo circular dentado fabricado por FERKOR" },
     tools: [
-      "Cuchillas industriales",
-      "Guillotinas",
-      "Punzones",
-      "Corte de cables",
-      "Huinchas",
-      "Corte liso",
-      "Herramientas dentadas",
-      "Selladores",
-      "Prepicadores",
-      "Herramientas especiales",
+      "Rectangulares lisos",
+      "Circulares lisos",
+      "Dentados y zigzag",
+      "Flow pack",
+      "Orbitales de gran diámetro",
+      "Tipo guillotina",
+      "Picado y prepicado",
     ],
   },
   {
@@ -49,6 +49,7 @@ export const services: Service[] = [
       "Evaluamos cada herramienta y, cuando es técnicamente viable, recuperamos su filo y geometría para que vuelva a trabajar.",
     icon: "rectificacion",
     image: images.rectificacion,
+    product: { src: "/images/herramientas/4f632e.webp", alt: "Cuchillo circular liso rectificado" },
     tools: ["Cuchillas rectas", "Cuchillas circulares", "Cuchillas dentadas", "Guillotinas"],
     priority: true,
   },
@@ -59,10 +60,11 @@ export const services: Service[] = [
     title: "Herramientas para envasado",
     short: "Envasado",
     summary:
-      "Cuchillas lisas, dentadas, selladores y sistemas de prepicado para maquinaria de envasado alimentario y empaques.",
+      "Cuchillos lisos, dentados y zigzag para envasadoras flow pack, procesamiento de alimentos y líneas de empaque.",
     icon: "herramientas",
     image: images.envasado,
-    tools: ["Corte liso", "Corte dentado", "Prepicado", "Selladores"],
+    product: { src: "/images/herramientas/107800.webp", alt: "Cuchillo recto de dentado zigzag para envasadora" },
+    tools: ["Flow pack", "Corte liso", "Corte dentado", "Picado y prepicado"],
   },
 ];
 
@@ -71,21 +73,28 @@ export const complementaryServices = [
     slug: "soluciones-a-medida",
     href: "/servicios/soluciones-a-medida",
     code: "FK-04",
-    title: "Adaptación de herramientas",
-    summary: "Soluciones desarrolladas a partir de piezas existentes o especificaciones particulares.",
+    title: "Mecanizado de piezas",
+    summary: "Ejes, piñones, resortes y piezas según requerimiento: electroerosión, fresado y torno.",
   },
   {
     slug: "soluciones-a-medida",
     href: "/servicios/soluciones-a-medida",
     code: "FK-05",
-    title: "Maestranza complementaria",
-    summary: "Resortes, ejes, piñones, correas de arrastre y piezas mecánicas, sujetos a evaluación.",
+    title: "Repuestos y componentes",
+    summary: "Correas de arrastre y rodamientos de carro, de bolas y de fricción.",
+  },
+  {
+    slug: "soluciones-a-medida",
+    href: "/servicios/soluciones-a-medida",
+    code: "FK-06",
+    title: "Asesoría técnica",
+    summary: "Planos técnicos, visitas a planta, levantamiento de medidas en terreno y asesoría online.",
   },
 ];
 
 export const specialties = [
-  "Fabricación a medida",
+  "Herramientas de corte",
   "Rectificación",
-  "Herramientas industriales",
+  "Mecanizado y repuestos",
   "Asesoría técnica",
 ];

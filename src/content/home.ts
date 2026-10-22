@@ -4,7 +4,7 @@ export const processSteps = [
   {
     n: "01",
     title: "Recibimos tu requerimiento",
-    text: "Envíanos planos, medidas, fotografías o una muestra de la herramienta.",
+    text: "Envíanos planos, medidas, fotografías o una muestra. Si lo necesitas, levantamos medidas en terreno.",
   },
   {
     n: "02",

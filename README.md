@@ -55,15 +55,20 @@ src/
 | Correo, teléfono, horario | `src/content/company.ts` → `contact` | Marcado "pendiente" |
 | Razón social, RUT, textos legales | `src/content/company.ts` → `legal` | "Información legal por validar" |
 | Redes sociales confirmadas | `src/content/company.ts` → `social` | No se muestran |
-| Fotografía propia (herramientas, rectificación, medición, Johel si autoriza) | `public/images` + `src/content/images.ts` | 15 imágenes provisionales de Unsplash con etiqueta "Ref. visual" |
-| Trabajos documentados | `src/content/projects.ts` | Familias de herramientas con imágenes referenciales |
+| Fotografía de ambiente propia (rectificación, taller, medición, Johel si autoriza) | `public/images` + `src/content/images.ts` | Hero, rectificación e industrias siguen con imágenes de Unsplash marcadas "Ref. visual" |
+| Validar nombres y familias de los productos fotografiados | `src/content/catalog.ts` | Nombres genéricos por familia, asignados a partir de las fotos |
+| Foto `IMG_3080.HEIC` del zip | — | No incluida: formato HEIC sin soporte en el pipeline; enviar en JPG |
 | Validación de iconos redibujados | `src/components/graphics/FerkorIcon.tsx` | Set propio en el trazo de la lámina |
 | Logos vectoriales finales del diseñador | `public/branding` | Se usan los SVG vectorizados del sistema de diseño |
 | Dominio y metadatos de producción | `src/app/layout.tsx` (`robots` está en `noindex`) | Maqueta no indexable |
 
+## Fotografía real de productos
+
+Las fotos del cliente (zip de oct. 2026) se recortaron con `rembg` (modelo isnet-general-use) y se compusieron sobre fondo blanco 1:1 con sombra de contacto suave. Resultado en `public/images/herramientas/*.webp` y datos en `src/content/catalog.ts`. Se descartaron fotos personales, capturas de pantalla y tomas cuyo recorte no quedó limpio (piezas sostenidas con la mano o sobre tela).
+
 ## Fotografía provisional
 
-Todas las fotos vienen de `images.unsplash.com` (licencia Unsplash) y se cargan desde su CDN vía `next/image` (`remotePatterns` en `next.config.ts`). **No son trabajos ni instalaciones de FERKOR.** Al recibir fotografía propia, reemplazar en `src/content/images.ts`, marcar `provisional: false` y quitar el dominio de `next.config.ts`.
+Las fotos de ambiente (no los productos) vienen de `images.unsplash.com` (licencia Unsplash) y se cargan desde su CDN vía `next/image` (`remotePatterns` en `next.config.ts`). **No son trabajos ni instalaciones de FERKOR.** Al recibir fotografía propia, reemplazar en `src/content/images.ts`, marcar `provisional: false` y quitar el dominio de `next.config.ts`.
 
 ## Próximas fases
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { services, complementaryServices, type Service } from "@/content/services";
 import { SectionLabel } from "@/components/ui/SectionLabel";
-import { Photo } from "@/components/ui/Photo";
+import Image from "next/image";
 import { Arrow } from "@/components/ui/Button";
 import { FerkorIcon } from "@/components/graphics/FerkorIcon";
 
@@ -31,8 +31,8 @@ export function Services() {
         </div>
 
         {/* Soluciones complementarias */}
-        <div className="on-dark mt-6 grid bg-ink text-white md:grid-cols-[1.1fr_1fr_1fr]">
-          <div className="flex flex-col justify-between gap-6 border-b border-white/10 p-7 md:border-r md:border-b-0 md:p-8">
+        <div className="on-dark mt-6 grid gap-px bg-white/10 text-white md:grid-cols-2 lg:grid-cols-4">
+          <div className="flex flex-col justify-between gap-6 bg-ink p-7 md:p-8">
             <p className="eyebrow text-steel-light">Soluciones complementarias</p>
             <Link
               href="/servicios/soluciones-a-medida"
@@ -42,8 +42,8 @@ export function Services() {
               <Arrow />
             </Link>
           </div>
-          {complementaryServices.map((c, i) => (
-            <div key={c.code} className={`p-7 md:p-8 ${i === 0 ? "border-b border-white/10 md:border-r md:border-b-0" : ""}`}>
+          {complementaryServices.map((c) => (
+            <div key={c.code} className="bg-ink p-7 md:p-8">
               <p className="font-mono text-xs text-red-light">{c.code}</p>
               <h3 className="mt-3 font-display text-2xl leading-tight font-bold uppercase">{c.title}</h3>
               <p className="mt-2 text-sm text-white/70">{c.summary}</p>
@@ -63,13 +63,21 @@ function ServiceCard({ service: s, layout, className = "" }: { service: Service;
         tall ? "flex-col" : "flex-col sm:flex-row"
       } ${className}`}
     >
-      <Photo
-        image={s.image}
-        sizes={tall ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 22vw, (min-width: 640px) 40vw, 100vw"}
-        className={tall ? "aspect-[4/3] w-full lg:aspect-auto lg:min-h-[340px] lg:flex-1" : "aspect-[16/10] w-full shrink-0 sm:aspect-auto sm:w-[42%]"}
-        imgClassName="transition-transform duration-700 ease-cut group-hover:scale-[1.04]"
-        badgePosition="tl"
-      />
+      {/* Fotografía real del producto sobre fondo blanco */}
+      <div
+        className={`relative overflow-hidden border-line bg-white ${
+          tall ? "aspect-[4/3] w-full border-b lg:aspect-auto lg:min-h-[340px] lg:flex-1" : "aspect-[16/10] w-full shrink-0 border-b sm:aspect-auto sm:w-[42%] sm:border-r sm:border-b-0"
+        }`}
+      >
+        <Image
+          src={s.product.src}
+          alt={s.product.alt}
+          fill
+          sizes={tall ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 22vw, (min-width: 640px) 40vw, 100vw"}
+          quality={80}
+          className={`object-contain transition-transform duration-700 ease-cut group-hover:scale-[1.04] ${tall ? "p-[3%]" : "p-[4%]"}`}
+        />
+      </div>
       <div className={`flex flex-1 flex-col p-6 md:p-8 ${tall ? "" : "sm:py-7"}`}>
         <div className="flex items-start justify-between gap-4">
           <p className="font-mono text-xs font-medium text-red">{s.code}</p>
