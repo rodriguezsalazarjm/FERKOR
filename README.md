@@ -1,7 +1,7 @@
 # FERKOR — Sitio web V1.0
 
 Sitio corporativo B2B de **FERKOR — Soluciones de Corte Industrial** (Santiago de Chile).
-Proyecto de **UPZITES**. Estado: **Fases A y B completas** (fundación + home de alta fidelidad). Las páginas interiores son provisionales hasta aprobar la home (Fase D).
+Proyecto de **UPZITES**. Estado: home comercial + páginas interiores (servicios, industrias, nosotros, trabajos, contacto) construidas.
 
 ## Desarrollo
 
@@ -51,6 +51,10 @@ src/
 
 | Dato / recurso | Dónde se completa | Estado en la web |
 | --- | --- | --- |
+| Reseñas de clientes reales (mín. 3, con autorización) | `src/content/reviews.ts` | La sección no se muestra hasta tener 3 |
+| Plazo de respuesta que puedan cumplir (ej. 24 h hábiles) | textos de Contacto / Proceso | No se promete plazo |
+| Confirmar si fabrican en taller propio o aliado | `src/app/nosotros/page.tsx` | Textos neutros ("fabricamos", según documento del cliente) |
+| Integración del formulario de cotización (correo/CRM) | `src/components/sections/inner/QuoteForm.tsx` | Muestra resumen; no envía datos |
 | Número de WhatsApp | `src/content/company.ts` → `contact.whatsapp` | Marcado "número por confirmar"; el botón se activa solo al cargarlo |
 | Correo, teléfono, horario | `src/content/company.ts` → `contact` | Marcado "pendiente" |
 | Razón social, RUT, textos legales | `src/content/company.ts` → `legal` | "Información legal por validar" |

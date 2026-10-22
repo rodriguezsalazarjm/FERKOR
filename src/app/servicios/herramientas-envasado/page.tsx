@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { PagePending } from "@/components/sections/PagePending";
+import { getService } from "@/content/services";
+import { ServiceDetail } from "@/components/sections/inner/ServiceDetail";
 
-export const metadata: Metadata = { title: "Herramientas para envasado", description: "Cuchillas lisas, dentadas, prepicadores y selladores para maquinaria de envasado." };
+const service = getService("herramientas-envasado")!;
+
+export const metadata: Metadata = { title: service.title, description: service.summary };
 
 export default function Page() {
-  return <PagePending index="P5" label="Herramientas para envasado" title="Corte para" accent="envasado." text="Cuchillas lisas, dentadas, prepicadores y selladores para maquinaria de envasado." />;
+  return <ServiceDetail service={service} />;
 }

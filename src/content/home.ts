@@ -3,23 +3,18 @@ import type { FerkorIconName } from "@/components/graphics/FerkorIcon";
 export const processSteps = [
   {
     n: "01",
-    title: "Recibimos tu requerimiento",
-    text: "Envíanos planos, medidas, fotografías o una muestra. Si lo necesitas, levantamos medidas en terreno.",
+    title: "Envíanos foto, plano o muestra",
+    text: "Por WhatsApp o formulario. Si lo necesitas, vamos a tu planta y levantamos medidas en terreno.",
   },
   {
     n: "02",
-    title: "Analizamos las especificaciones",
-    text: "Revisamos material, geometría, tolerancias y la aplicación en tu máquina.",
+    title: "Evaluamos y te cotizamos",
+    text: "Revisamos material, geometría y la aplicación en tu máquina, y te proponemos fabricar, afilar o reemplazar.",
   },
   {
     n: "03",
-    title: "Evaluamos la solución",
-    text: "Definimos si corresponde fabricar, adaptar o rectificar, y te cotizamos.",
-  },
-  {
-    n: "04",
-    title: "Coordinamos trabajo y entrega",
-    text: "Gestionamos la fabricación con nuestro taller aliado y te mantenemos informado.",
+    title: "Fabricamos y entregamos",
+    text: "Coordinamos el trabajo y la entrega, y te mantenemos informado durante el proceso.",
   },
 ];
 

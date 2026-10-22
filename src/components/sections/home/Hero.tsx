@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { images } from "@/content/images";
 import { company } from "@/content/company";
 import { Photo, ProvisionalBadge } from "@/components/ui/Photo";
@@ -5,6 +6,12 @@ import { Button } from "@/components/ui/Button";
 import { TechnicalGrid } from "@/components/graphics/TechnicalGrid";
 import { CircularBladeDrawing, TitleBlock } from "@/components/graphics/TechnicalDrawings";
 import { CutGeometry } from "@/components/graphics/CutGeometry";
+
+const heroIndustries = [
+  { slug: "envasado", label: "Envasado flow pack" },
+  { slug: "alimentos", label: "Alimentos" },
+  { slug: "papel", label: "Papel y cartón" },
+];
 
 export function Hero() {
   return (
@@ -24,29 +31,40 @@ export function Hero() {
         <div className="flex flex-col justify-center pt-14 pb-12 lg:max-w-[44vw] lg:pt-16">
           <p className="mono-index flex items-center gap-3 text-steel-light">
             <span className="h-px w-8 bg-red" aria-hidden="true" />
-            {company.descriptor} · {company.city}
+            Precisión para cortar · Respuesta para producir
           </p>
 
-          <h1 id="hero-title" className="display mt-7 text-[clamp(3.25rem,12.5vw,4.5rem)] font-black md:text-[clamp(4.5rem,10vw,6rem)] lg:text-[clamp(3rem,6.1vw,6.75rem)]">
-            <span className="block">Precisión</span>{" "}
-            <span className="block">para cortar.</span>{" "}
-            <span className="mt-[0.06em] block text-red">Respuesta</span>{" "}
-            <span className="block text-red">para producir.</span>
+          <h1 id="hero-title" className="display mt-7 text-[clamp(3rem,11.5vw,4.25rem)] font-black md:text-[clamp(4.25rem,9vw,5.75rem)] lg:text-[clamp(3rem,5.5vw,6rem)]">
+            <span className="block">Cuchillos industriales</span>{" "}
+            <span className="block">a medida.</span>{" "}
+            <span className="mt-[0.06em] block text-red">Afilado y rectificado.</span>
           </h1>
 
-          <p className="mt-8 max-w-[34rem] text-lg leading-relaxed text-white/80 md:text-xl md:leading-[1.55]">
-            Fabricación, adaptación y rectificación de herramientas de corte industrial según los requerimientos técnicos
-            de cada operación.
+          <p className="mt-7 max-w-[34rem] text-lg leading-relaxed text-white/85 md:text-xl md:leading-[1.55]">
+            Fabricamos y recuperamos cuchillos para envasadoras flow pack, alimentos y papel en {company.city}. Envíanos
+            una foto, plano o muestra y te cotizamos.
           </p>
 
-          <div className="mt-10 flex flex-col gap-3 xs:flex-row xs:flex-wrap">
+          <div className="mt-9 flex flex-col gap-3 xs:flex-row xs:flex-wrap">
             <Button href="/contacto" size="lg" arrow>
-              Solicitar cotización
+              Cotizar con foto o plano
             </Button>
             <Button href="/servicios" variant="contorno-claro" size="lg">
-              Explorar soluciones
+              Ver servicios
             </Button>
           </div>
+
+          <nav aria-label="Industrias" className="mt-9 flex flex-wrap items-center gap-x-1 gap-y-2 text-sm">
+            <span className="mono-index mr-2 text-steel-light">Para</span>
+            {heroIndustries.map((i, n) => (
+              <span key={i.slug} className="flex items-center gap-1">
+                {n > 0 && <span className="text-white/30" aria-hidden="true">/</span>}
+                <Link href={`/industrias#${i.slug}`} className="px-1.5 py-1 font-medium text-white/85 underline-offset-4 hover:text-white hover:underline">
+                  {i.label}
+                </Link>
+              </span>
+            ))}
+          </nav>
         </div>
 
         {/* Franja inferior de datos: solo información confirmada */}

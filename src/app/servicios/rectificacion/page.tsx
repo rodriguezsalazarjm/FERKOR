@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { PagePending } from "@/components/sections/PagePending";
+import { getService } from "@/content/services";
+import { ServiceDetail } from "@/components/sections/inner/ServiceDetail";
 
-export const metadata: Metadata = { title: "Rectificación y afilado", description: "Evaluación técnica, rectificación y afilado de herramientas de corte industrial." };
+const service = getService("rectificacion")!;
+
+export const metadata: Metadata = { title: service.title, description: service.summary };
 
 export default function Page() {
-  return <PagePending index="P4" label="Rectificación y afilado" title="El filo importa." accent="La continuidad también." text="Evaluación técnica, rectificación y afilado de herramientas de corte industrial." />;
+  return <ServiceDetail service={service} />;
 }

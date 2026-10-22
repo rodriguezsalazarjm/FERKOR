@@ -7,11 +7,11 @@ import { Arrow } from "@/components/ui/Button";
 export function Works() {
   const featured = featuredRefs.map((r) => catalog.find((i) => i.ref === r)).filter((i) => i !== undefined);
   return (
-    <section aria-labelledby="trabajos-title" className="bg-paper py-20 md:py-28 lg:py-32">
+    <section aria-labelledby="trabajos-title" className="bg-white py-20 md:py-28 lg:py-32">
       <div className="wrap">
         <div className="grid gap-8 lg:grid-cols-12 lg:items-end">
           <div className="lg:col-span-7">
-            <SectionLabel index="05">Trabajos y herramientas</SectionLabel>
+            <SectionLabel index="02">Trabajos reales</SectionLabel>
             <h2 id="trabajos-title" className="display mt-6 text-[clamp(2.6rem,6vw,4.75rem)] text-ink">
               Herramientas reales,{" "}
               <span className="block text-red">hechas a medida.</span>

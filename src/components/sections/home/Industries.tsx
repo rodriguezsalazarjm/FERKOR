@@ -1,12 +1,16 @@
 import Link from "next/link";
-import { industries, type Industry } from "@/content/industries";
+import { getIndustry, type Industry } from "@/content/industries";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Photo } from "@/components/ui/Photo";
 import { Arrow } from "@/components/ui/Button";
 import { BlueprintPattern } from "@/components/graphics/BlueprintPattern";
 
 export function Industries() {
-  const [food, bags, paper, products, other] = industries;
+  const food = getIndustry("envasado");
+  const bags = getIndustry("empaques");
+  const paper = getIndustry("papel");
+  const products = getIndustry("alimentos");
+  const other = getIndustry("otras");
   return (
     <section aria-labelledby="industrias-title" className="bg-white py-20 md:py-28 lg:py-32">
       <div className="wrap">
@@ -54,7 +58,7 @@ export function Industries() {
               <p className="relative font-mono text-xs text-red">{products.code}</p>
               <div className="relative">
                 <h3 className="font-display text-[1.7rem] leading-[0.95] font-extrabold text-ink uppercase">{products.title}</h3>
-                <p className="mt-2 text-sm text-ink/70">{products.needs[0]}</p>
+                <p className="mt-2 text-sm text-ink/70">{products.summary}</p>
               </div>
             </article>
           </div>
@@ -64,7 +68,7 @@ export function Industries() {
               <p className="shrink-0 font-mono text-xs text-red-light">{other.code}</p>
               <h3 className="font-display text-[1.7rem] leading-[0.95] font-extrabold uppercase md:text-3xl">{other.title}</h3>
             </div>
-            <p className="text-sm text-white/70 md:max-w-md md:text-right">{other.needs[0]}</p>
+            <p className="text-sm text-white/70 md:max-w-md md:text-right">{other.summary}</p>
           </article>
         </div>
       </div>
@@ -82,7 +86,7 @@ function IndustryPhotoTile({ industry: i, className = "", compact = false }: { i
       <div className={`relative ${compact ? "p-6" : "p-6 md:p-8"}`}>
         <p className="font-mono text-xs text-red-light">{i.code}</p>
         <h3 className={`mt-2 font-display leading-[0.95] font-extrabold uppercase ${compact ? "text-[1.7rem]" : "text-3xl md:text-4xl"}`}>{i.title}</h3>
-        <p className="mt-2 text-sm text-white/75">{i.needs[0]}</p>
+        <p className="mt-2 text-sm text-white/75">{i.summary}</p>
       </div>
     </article>
   );

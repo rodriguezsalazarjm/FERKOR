@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { mainNav, quoteCta } from "@/content/navigation";
-import { services, complementaryServices } from "@/content/services";
+import { allServices } from "@/content/services";
 import { company, whatsappHref } from "@/content/company";
 import { brand } from "@/config/brand";
 import { Logo } from "@/components/ui/Logo";
@@ -9,10 +9,7 @@ import { Pending } from "@/components/ui/Pending";
 
 export function Footer() {
   const wa = whatsappHref();
-  const serviceLinks = [
-    ...services.map((s) => ({ label: s.title, href: s.href })),
-    { label: "Soluciones a medida", href: complementaryServices[0].href },
-  ];
+  const serviceLinks = allServices.map((s) => ({ label: s.title, href: s.href }));
 
   return (
     <footer className="on-dark relative overflow-hidden bg-ink text-white">

@@ -9,6 +9,9 @@ const nextConfig: NextConfig = {
     remotePatterns: [new URL("https://images.unsplash.com/**")],
     qualities: [70, 80],
   },
+  async redirects() {
+    return [{ source: "/servicios/soluciones-a-medida", destination: "/servicios/mecanizado-y-repuestos", permanent: true }];
+  },
   turbopack: {
     rules: {
       "*.css": {

@@ -16,11 +16,11 @@ export function Intro() {
   return (
     <section aria-labelledby="intro-title" className="relative overflow-hidden bg-white py-20 md:py-28 lg:py-32">
       <div className="wrap">
-        <TechnicalDivider label="01 / 09" meta="Empresa" className="mb-14 md:mb-20" />
+        <TechnicalDivider label="05 / 08" meta="Empresa" className="mb-14 md:mb-20" />
 
         <div className="grid gap-12 lg:grid-cols-12 lg:gap-8">
           <div className="lg:col-span-6">
-            <SectionLabel index="01">Quiénes somos</SectionLabel>
+            <SectionLabel index="05">Quiénes somos</SectionLabel>
             <h2 id="intro-title" className="display mt-6 text-[clamp(2.6rem,6vw,4.75rem)] text-ink">
               Conocimiento técnico{" "}
               <span className="block text-red">que se convierte en soluciones.</span>

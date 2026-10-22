@@ -1,8 +1,11 @@
 import type { Metadata } from "next";
-import { PagePending } from "@/components/sections/PagePending";
+import { getService } from "@/content/services";
+import { ServiceDetail } from "@/components/sections/inner/ServiceDetail";
 
-export const metadata: Metadata = { title: "Fabricación a medida", description: "Herramientas de corte fabricadas a partir de planos, medidas, muestras o fotografías." };
+const service = getService("fabricacion")!;
+
+export const metadata: Metadata = { title: service.title, description: service.summary };
 
 export default function Page() {
-  return <PagePending index="P3" label="Fabricación a medida" title="Fabricación" accent="según tu especificación." text="Herramientas de corte fabricadas a partir de planos, medidas, muestras o fotografías." />;
+  return <ServiceDetail service={service} />;
 }
