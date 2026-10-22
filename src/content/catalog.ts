@@ -60,8 +60,10 @@ export const catalog: CatalogItem[] = [
   { ref: "FK-RP-01", src: img("7946f4"), category: "rodamientos", title: "Rodamiento de fricción", alt: "Rodamiento lineal con buje de fricción" },
   { ref: "FK-RP-02", src: img("84d875"), category: "rodamientos", title: "Rodamiento lineal y buje", alt: "Rodamiento lineal junto a su buje de fricción" },
   { ref: "FK-RP-03", src: img("c8f3cd"), category: "rodamientos", title: "Rodamiento lineal", alt: "Rodamiento lineal de carro" },
+  // Correas de arrastre
+  { ref: "FK-CO-01", src: img("correa"), category: "correas", title: "Correa de arrastre", alt: "Correas dentadas de arrastre con recubrimiento de goma roja para envasadora" },
   { ref: "FK-RP-04", src: img("fdb4b3"), category: "rodamientos", title: "Buje de fricción", alt: "Buje de fricción polimérico" },
 ];
 
 /** Selección para la home: una muestra variada de familias. */
-export const featuredRefs = ["FK-ZZ-01", "FK-DE-03", "FK-DE-01", "FK-DE-04", "FK-RP-01", "FK-RP-04", "FK-CI-03", "FK-ME-01"];
+export const featuredRefs = ["FK-ZZ-01", "FK-DE-03", "FK-DE-01", "FK-DE-04", "FK-RP-01", "FK-CO-01", "FK-CI-03", "FK-ME-01"];

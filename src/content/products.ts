@@ -166,10 +166,10 @@ export const products: Service[] = [
     title: "Correas de arrastre",
     summary: "Correas con goma de arrastre que desplazan el film en las envasadoras.",
     icon: "materiales",
-    // Sin foto real de correas todavía (PENDIENTE: fotos del cliente).
+    product: { src: img("correa"), alt: "Correas dentadas de arrastre con goma roja para envasadora" },
     headline: ["Correas de arrastre", "para envasadoras."],
     intro:
-      "Las correas de arrastre llevan una goma, normalmente roja, que toma el film y lo desplaza dentro de la envasadora. Cuando se gastan, el film patina y la bolsa sale mal. Trabajamos con los tipos más usados.",
+      "Las correas de arrastre son correas dentadas con una cara de goma, normalmente roja, que toma el film y lo desplaza dentro de la envasadora; los dientes engranan en las poleas y mantienen el avance sincronizado. Cuando la goma se gasta, el film patina y la bolsa sale mal. Trabajamos con los tipos más usados.",
     uses: [
       { title: "Envasadoras verticales", text: "Arrastre del film hacia el formador y las mordazas." },
       { title: "Líneas de empaque", text: "Desplazamiento de film en equipos de envasado." },
@@ -178,7 +178,7 @@ export const products: Service[] = [
       { title: "Correas con goma de arrastre", text: "Los tipos más usados en envasadoras." },
       { title: "Identificación", text: "Te ayudamos a identificar la correa a partir de una foto o de la pieza gastada." },
     ],
-    catalogRefs: [],
+    catalogRefs: ["FK-CO-01"],
     quoteNeeds: ["Fotografía de la correa", "Largo, ancho y tipo de dentado interior", "Marca de la envasadora, si la sabes", "Cantidad"],
     faqs: [
       {
