@@ -17,7 +17,7 @@ export default function HomePage() {
     <>
       <Hero />
       <SpecialtyStrip />
-      <ClientLogos variant="white" />
+      <ClientLogos variant="marquee" />
       <FeaturedProducts />
       <Services />
       <IdentifyBand />

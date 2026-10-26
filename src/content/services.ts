@@ -49,7 +49,6 @@ export type Service = {
   gallery?: { label: string; src?: string; alt?: string }[];
 };
 
-const img = (id: string) => `/images/herramientas/${id}.webp`;
 const job = (id: string) => `/images/trabajos/${id}.webp`;
 
 /** Servicios principales, ordenados por la necesidad del cliente. */
@@ -139,7 +138,7 @@ export const services: Service[] = [
       { label: "Cuchillo circular en rectificado", src: job("rectificado-disco-grande"), alt: "Cuchillo circular de gran diámetro montado para rectificado" },
       { label: "Antes y después del afilado" },
     ],
-    catalogRefs: ["FK-CI-01", "FK-CI-06", "FK-ZZ-01", "FK-RE-02"],
+    catalogRefs: ["FK-CI-01", "FK-CI-06", "FK-CI-07", "FK-CI-08"],
     quoteNeeds: [
       "Fotografías del cuchillo y de su filo",
       "Medidas principales",
@@ -176,7 +175,7 @@ export const services: Service[] = [
     title: "Mecanizado de piezas",
     summary: "Ejes, piñones, resortes y piezas a medida por electroerosión, fresado y torno.",
     icon: "materiales",
-    product: { src: img("9d328c"), alt: "Piñón mecanizado" },
+    product: { src: job("pinones"), alt: "Piñones de acero mecanizados" },
     headline: ["Piezas mecanizadas", "para tu línea."],
     intro:
       "Complementamos la fabricación de herramientas de corte con mecanizado de piezas industriales: repuestos de máquina que se gastan, se quiebran o ya no se consiguen. Trabajamos según los requerimientos de cada cliente, a partir de una pieza existente o de un plano.",
@@ -194,7 +193,7 @@ export const services: Service[] = [
       { label: "Equipos utilizados" },
       { label: "Pieza durante el mecanizado" },
     ],
-    catalogRefs: ["FK-ME-10", "FK-ME-12", "FK-ME-13", "FK-ME-01", "FK-ME-02", "FK-ME-03", "FK-ME-05", "FK-ME-09"],
+    catalogRefs: ["FK-ME-10", "FK-ME-12", "FK-ME-13", "FK-ME-11", "FK-ME-02", "FK-ME-03", "FK-ME-05", "FK-ME-04"],
     quoteNeeds: ["Pieza de muestra, plano o fotografías con medidas", "Material, si lo conoces", "Cantidad requerida"],
     faqs: [
       {

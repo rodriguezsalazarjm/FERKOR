@@ -6,6 +6,7 @@ import { brand } from "@/config/brand";
 import { Logo } from "@/components/ui/Logo";
 import { TechnicalGrid } from "@/components/graphics/TechnicalGrid";
 import { Pending } from "@/components/ui/Pending";
+import { ClientLogos } from "@/components/sections/ClientLogos";
 
 export function Footer() {
   const wa = whatsappHref();
@@ -87,7 +88,11 @@ export function Footer() {
           </div>
         </div>
 
-        <div className="mt-16 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-steel-light md:flex-row md:items-center md:justify-between">
+        <div className="mt-14 border-t border-white/10 pt-10">
+          <ClientLogos variant="footer" />
+        </div>
+
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-steel-light md:flex-row md:items-center md:justify-between">
           <p className="font-mono tracking-[0.04em]">
             © {company.copyrightYear} FERKOR · {company.descriptor} · {company.coverage}
           </p>

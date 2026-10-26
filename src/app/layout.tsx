@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
+import { WhatsAppFloat } from "@/components/ui/WhatsAppFloat";
+import { company } from "@/content/company";
 import { site } from "@/config/site";
 import "./globals.css";
 
@@ -68,7 +70,8 @@ const jsonLd = {
   description: "Cuchillos dentados y zigzag para envasadoras y flow pack, afilado, rodamientos lineales y correas de arrastre.",
   url: site.url,
   logo: `${site.url}/branding/ferkor-isotipo-rojo.svg`,
-  areaServed: { "@type": "City", name: "Santiago" },
+  telephone: company.contact.whatsapp ? `+${company.contact.whatsapp}` : undefined,
+  areaServed: { "@type": "Country", name: "Chile" },
   address: { "@type": "PostalAddress", addressLocality: "Santiago", addressCountry: "CL" },
 };
 
@@ -91,6 +94,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </main>
         <Footer />
+        <WhatsAppFloat />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       </body>
     </html>

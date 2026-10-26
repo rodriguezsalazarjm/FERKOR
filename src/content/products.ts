@@ -53,7 +53,7 @@ export const products: Service[] = [
       brands: ["Volpak", "Tecmar", "Rovema"],
       note: "Fabricamos cuchillos dentados compatibles con envasadoras de estas marcas, a partir de tu muestra o sus medidas. FERKOR no es distribuidor oficial ni fabricante autorizado de estas marcas; los nombres se usan solo para identificar la máquina.",
     },
-    catalogRefs: ["FK-DE-07", "FK-DE-09", "FK-DE-08", "FK-DE-03", "FK-DE-10", "FK-DE-11"],
+    catalogRefs: ["FK-DE-07", "FK-DE-09", "FK-DE-08", "FK-DE-10", "FK-DE-11"],
     quoteNeeds: [
       "Fotografía del cuchillo, ojalá con una huincha al lado",
       "Marca o tipo de envasadora, si lo sabes",
@@ -117,7 +117,7 @@ export const products: Service[] = [
         { label: "Máquina compatible", value: null, note: "Indícanos marca y modelo de tu flow pack" },
       ],
     },
-    catalogRefs: ["FK-ZZ-02", "FK-ZZ-01", "FK-DE-07"],
+    catalogRefs: ["FK-ZZ-02", "FK-DE-07", "FK-DE-08"],
     quoteNeeds: [
       "Fotografía del cuchillo zigzag con una huincha al lado",
       "Marca y modelo de la flow pack, si lo sabes",
@@ -170,7 +170,7 @@ export const products: Service[] = [
       { title: "De fricción", text: "Sin bolas: deslizan sobre un inserto interior de bajo roce." },
       { title: "Insertos de recambio", text: "La parte interior del rodamiento de fricción, para cambiar solo lo que se gasta." },
     ],
-    catalogRefs: ["FK-RP-01", "FK-RP-02", "FK-RP-03", "FK-RP-04"],
+    catalogRefs: ["FK-RP-01", "FK-RP-02", "FK-RP-04"],
     quoteNeeds: ["Fotografía del rodamiento", "Diámetro del eje y medidas exteriores", "Referencia, si la tiene grabada", "Cantidad"],
     faqs: [
       {
@@ -199,7 +199,7 @@ export const products: Service[] = [
     title: "Correas de arrastre",
     summary: "Correas con goma de arrastre que desplazan el film en las envasadoras.",
     icon: "materiales",
-    product: { src: img("correa"), alt: "Correas dentadas de arrastre con goma roja para envasadora" },
+    product: { src: img("correa-arrastre"), alt: "Correas dentadas de arrastre con goma roja para envasadora" },
     headline: ["Correas de arrastre", "para envasadoras."],
     intro:
       "Las correas de arrastre son correas dentadas con una cara de goma, normalmente roja, que toma el film y lo desplaza dentro de la envasadora; los dientes engranan en las poleas y mantienen el avance sincronizado. Cuando la goma se gasta, el film patina y la bolsa sale mal. Trabajamos con los tipos más usados.",

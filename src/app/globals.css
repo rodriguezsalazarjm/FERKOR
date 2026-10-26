@@ -344,6 +344,21 @@
 .marquee-wrap:hover .marquee {
   animation-play-state: paused;
 }
+.marquee-slow {
+  animation-duration: 55s;
+}
+
+/* Burbuja del botón flotante de WhatsApp */
+@keyframes wa-bubble-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px) scale(0.96);
+  }
+}
+.wa-bubble {
+  transform-origin: bottom right;
+  animation: wa-bubble-in 0.35s var(--ease-cut, ease-out) both;
+}
 
 /* Botón principal: destello diagonal (el "corte") al pasar el cursor */
 .btn-sweep {
@@ -398,6 +413,7 @@
   .rule-grow,
   .grow-x,
   .marquee,
+  .wa-bubble,
   .parallax,
   .hero-settle,
   .hero-plot {

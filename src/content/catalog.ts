@@ -44,8 +44,6 @@ export const catalog: CatalogItem[] = [
   // Dentados y zigzag (PENDIENTE: el cliente validará qué modelos son zigzag)
   { ref: "FK-ZZ-02", src: job("zigzag-recto"), category: "zigzag", title: "Cuchillo zigzag", alt: "Juego de cuchillos rectos de dentado zigzag" },
   { ref: "FK-DE-07", src: job("dentado-recto-par"), category: "dentados", title: "Cuchillo dentado recto", alt: "Par de cuchillos dentados rectos para envasadora", scene: true },
-  { ref: "FK-ZZ-01", src: img("107800"), category: "zigzag", title: "Cuchillo zigzag", alt: "Cuchillo recto de dentado zigzag para máquina flow pack" },
-  { ref: "FK-DE-03", src: img("e8fa22"), category: "dentados", title: "Cuchillo dentado ranurado", alt: "Cuchillo dentado recto con ranuras de fijación" },
   { ref: "FK-DE-08", src: job("dentado-recto-espuma"), category: "dentados", title: "Cuchillos dentados rectos", alt: "Dos cuchillos dentados rectos de acero", scene: true },
   { ref: "FK-DE-09", src: job("dentado-envasadora-perfil"), category: "dentados", title: "Cuchillo dentado para envasadora", alt: "Cuchillo dentado largo con horquilla de montaje, visto de perfil", scene: true },
   { ref: "FK-DE-10", src: job("circular-dentado"), category: "dentados", title: "Cuchillo circular dentado", alt: "Cuchillo circular de acero con dentado perimetral", scene: true },
@@ -61,17 +59,13 @@ export const catalog: CatalogItem[] = [
   { ref: "FK-CI-05", src: img("d96ed1"), category: "circulares", title: "Disco de corte", alt: "Disco de corte circular rectificado" },
   // Rectangulares y guillotina
   { ref: "FK-RE-06", src: job("rectangular-escalonado"), category: "rectangulares", title: "Cuchillas rectas con ranuras", alt: "Par de cuchillas rectas de acero con ranuras y perforaciones de montaje", scene: true },
-  { ref: "FK-RE-01", src: img("bf96c3"), category: "rectangulares", title: "Cuchilla rectangular ranurada", alt: "Par de cuchillas rectangulares con ranura central" },
-  { ref: "FK-RE-02", src: img("7d8617"), category: "rectangulares", title: "Cuchillo rectangular", alt: "Cuchillo rectangular de acero con perforaciones" },
   { ref: "FK-RE-03", src: img("b818e5"), category: "rectangulares", title: "Cuchillos rectos largos", alt: "Juego de cuchillos rectos largos de acero" },
-  { ref: "FK-RE-04", src: img("6378b1"), category: "rectangulares", title: "Cuchillos rectangulares", alt: "Cuchillos rectangulares de acero con perforaciones" },
   { ref: "FK-RE-05", src: img("ef3d57"), category: "rectangulares", title: "Cuchilla poligonal", alt: "Cuchilla de acero de perfil poligonal con filo" },
   // Cuchillas especiales. PENDIENTE validar: por su forma de hoz corresponderían a cuchillas de cutter (procesamiento de alimentos).
   { ref: "FK-ES-01", src: job("cutter-hoz"), category: "especiales", title: "Cuchilla curva tipo hoz", alt: "Cuchilla curva de acero en forma de hoz con perforaciones de montaje", scene: true },
   { ref: "FK-ES-02", src: job("cutter-dentadas"), category: "especiales", title: "Cuchillas curvas dentadas", alt: "Dos cuchillas curvas de filo dentado con perforaciones de montaje", scene: true },
   // Mecanizado de piezas
   { ref: "FK-ME-10", src: job("pinones"), category: "mecanizado", title: "Piñones", alt: "Dos piñones de acero mecanizados con chavetero", scene: true },
-  { ref: "FK-ME-01", src: img("9d328c"), category: "mecanizado", title: "Piñón", alt: "Piñón de acero mecanizado con chavetero" },
   { ref: "FK-ME-11", src: job("pieza-mecanizada-buje"), category: "mecanizado", title: "Pieza mecanizada", alt: "Pieza de aluminio mecanizada con rebajes y perforaciones", scene: true },
   { ref: "FK-ME-12", src: job("piezas-mecanizadas-serie"), category: "mecanizado", title: "Piezas mecanizadas en serie", alt: "Piezas de acero mecanizadas apiladas", scene: true },
   { ref: "FK-ME-13", src: job("pieza-polimero"), category: "mecanizado", title: "Pieza de polímero", alt: "Pieza de polímero blanco mecanizada", scene: true },
@@ -81,14 +75,12 @@ export const catalog: CatalogItem[] = [
   { ref: "FK-ME-05", src: img("23c2b8"), category: "mecanizado", title: "Componente torneado", alt: "Componente circular torneado con buje" },
   { ref: "FK-ME-07", src: img("506b23"), category: "mecanizado", title: "Componente torneado", alt: "Componente circular torneado con buje central" },
   { ref: "FK-ME-08", src: img("ed54dd"), category: "mecanizado", title: "Componente torneado", alt: "Componente torneado con base" },
-  { ref: "FK-ME-09", src: img("c06d6d"), category: "mecanizado", title: "Juego de componentes", alt: "Juego de componentes circulares torneados" },
   // Rodamientos
   { ref: "FK-RP-01", src: img("7946f4"), category: "rodamientos", title: "Rodamiento de fricción", alt: "Rodamiento lineal con buje de fricción" },
   { ref: "FK-RP-02", src: img("84d875"), category: "rodamientos", title: "Rodamiento lineal y buje", alt: "Rodamiento lineal junto a su buje de fricción" },
-  { ref: "FK-RP-03", src: img("c8f3cd"), category: "rodamientos", title: "Rodamiento lineal", alt: "Rodamiento lineal de carro" },
   { ref: "FK-RP-04", src: img("fdb4b3"), category: "rodamientos", title: "Buje de fricción", alt: "Buje de fricción polimérico" },
   // Correas de arrastre
-  { ref: "FK-CO-01", src: img("correa"), category: "correas", title: "Correa de arrastre", alt: "Correas dentadas de arrastre con recubrimiento de goma roja para envasadora" },
+  { ref: "FK-CO-01", src: img("correa-arrastre"), category: "correas", title: "Correa de arrastre", alt: "Correas dentadas de arrastre con recubrimiento de goma roja para envasadora" },
 ];
 
 /** Selección para la home: una muestra variada de familias. */

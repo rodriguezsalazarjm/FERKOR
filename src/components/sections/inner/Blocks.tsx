@@ -65,8 +65,10 @@ export function IncludesList({ items }: { items: { title: string; text: string }
 export function CatalogStrip({ refs }: { refs: string[] }) {
   const items = refs.map((r) => catalog.find((i) => i.ref === r)).filter((i) => i !== undefined);
   if (!items.length) return null;
+  // Columnas según la cantidad de piezas: sin celdas vacías.
+  const cols = ["lg:grid-cols-1", "lg:grid-cols-2", "lg:grid-cols-3", "lg:grid-cols-4"][Math.min(items.length, 4) - 1];
   return (
-    <ul className="grid grid-cols-2 gap-px border border-line bg-line lg:grid-cols-4">
+    <ul className={`grid grid-cols-2 gap-px border border-line bg-line max-lg:[&>li:last-child:nth-child(odd)]:col-span-2 ${cols}`}>
       {items.map((item) => (
         <li key={item.ref}>
           <ProductTile item={item} sizes="(min-width: 1024px) 25vw, 50vw" className="h-full" />

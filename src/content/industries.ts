@@ -65,7 +65,7 @@ export const industries: Industry[] = [
     summary: "Corte y prepicado de film para fabricación de empaques y bolsas.",
     needs: ["Cuchillos de corte y prepicado de film", "Cuchillos rectos y dentados para confección"],
     serviceSlugs: ["cuchillos-dentados-envasadora", "fabricacion"],
-    catalogRefs: ["FK-DE-03", "FK-RE-01"],
+    catalogRefs: ["FK-DE-08", "FK-RE-06"],
     image: images.empaques,
   },
   {
