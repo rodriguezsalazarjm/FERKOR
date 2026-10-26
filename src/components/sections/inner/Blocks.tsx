@@ -77,8 +77,8 @@ export function CatalogStrip({ refs }: { refs: string[] }) {
 }
 
 /** Ficha "qué necesitamos para cotizar" + CTAs. */
-export function QuoteChecklist({ items, service }: { items: string[]; service?: string }) {
-  const wa = whatsappHref(service ? `Hola FERKOR, quiero cotizar: ${service}.` : undefined);
+export function QuoteChecklist({ items, service, waMessage }: { items: string[]; service?: string; waMessage?: string }) {
+  const wa = whatsappHref(waMessage ?? (service ? `Hola FERKOR, quiero cotizar: ${service}.` : undefined));
   return (
     <div className="on-dark chamfer-lg grid gap-10 bg-ink p-8 text-white md:p-12 lg:grid-cols-12">
       <div className="lg:col-span-5">

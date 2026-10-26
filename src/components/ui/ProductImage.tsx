@@ -9,10 +9,12 @@ type Props = {
   /** Padding interno de la foto (porcentaje del contenedor). */
   pad?: string;
   className?: string;
+  /** Foto en contexto: llena el contenedor. */
+  cover?: boolean;
 };
 
 /** Foto real de producto sobre blanco; sin foto, placeholder técnico identificado. Requiere contenedor posicionado con tamaño. */
-export function ProductImage({ product, icon, sizes, pad = "p-[4%]", className = "" }: Props) {
+export function ProductImage({ product, icon, sizes, pad = "p-[4%]", className = "", cover = false }: Props) {
   if (product) {
     return (
       <Image
@@ -21,7 +23,7 @@ export function ProductImage({ product, icon, sizes, pad = "p-[4%]", className =
         fill
         sizes={sizes}
         quality={80}
-        className={`object-contain ${pad} transition-transform duration-700 ease-cut group-hover:scale-[1.04] ${className}`}
+        className={`${cover ? "object-cover" : `object-contain ${pad}`} transition-transform duration-700 ease-cut group-hover:scale-[1.04] ${className}`}
       />
     );
   }

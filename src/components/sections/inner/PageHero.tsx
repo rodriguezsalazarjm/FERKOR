@@ -73,7 +73,7 @@ export function PageHero({ index, label, title, accent, lead, trail = [], action
         {product && (
           <div className="hero-in relative lg:col-span-5" style={{ "--i": -2 } as React.CSSProperties}>
             <div className="chamfer-lg relative aspect-square bg-white">
-              <Image src={product.src} alt={product.alt} fill priority sizes="(min-width: 1024px) 40vw, 100vw" quality={80} className="hero-settle object-contain p-[5%]" />
+              <Image src={product.src} alt={product.alt} fill priority sizes="(min-width: 1024px) 40vw, 100vw" quality={80} className={`hero-settle ${isScene(product.src) ? "object-cover" : "object-contain p-[5%]"}`} />
             </div>
             <CutGeometry variant="corner" className="absolute -bottom-3 -left-3 h-16 w-16" />
           </div>
@@ -82,3 +82,6 @@ export function PageHero({ index, label, title, accent, lead, trail = [], action
     </section>
   );
 }
+
+/** Fotos en contexto (no recortadas sobre blanco) se muestran a sangre. */
+const isScene = (src: string) => src.startsWith("/images/trabajos/");

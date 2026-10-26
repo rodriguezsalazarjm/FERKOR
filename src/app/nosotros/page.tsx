@@ -7,6 +7,7 @@ import { StraightBladeDrawing } from "@/components/graphics/TechnicalDrawings";
 import { PageHero } from "@/components/sections/inner/PageHero";
 import { BlockHeader, CatalogStrip } from "@/components/sections/inner/Blocks";
 import { Reviews } from "@/components/sections/Reviews";
+import { ProductImage } from "@/components/ui/ProductImage";
 import { FinalCta } from "@/components/sections/home/FinalCta";
 
 export const metadata: Metadata = {
@@ -16,10 +17,19 @@ export const metadata: Metadata = {
 
 const { experience: xp } = company;
 
+// TODO(cliente): confirmar el desglose de la trayectoria (años en terreno y años de FERKOR) para que sume la cifra declarada.
 const timeline = [
-  { n: `${xp.fieldSalesYears} años`, t: "En terreno", d: "Como vendedor técnico, conociendo las líneas de producción y los problemas de corte de cada cliente." },
-  { n: `${xp.ventureYears} años`, t: "FERKOR", d: "Desarrollando soluciones propias: cuchillos a medida, afilado, mecanizado y repuestos." },
+  { n: "Origen", t: "En terreno", d: "Como vendedor técnico, conociendo las líneas de producción y los problemas de corte de cada cliente." },
+  { n: `${xp.years} años`, t: "Experiencia", d: "Desarrollando soluciones propias: cuchillos a medida, afilado, mecanizado y repuestos." },
   { n: "Hoy", t: "Atención directa", d: "Cada requerimiento lo evalúa quien conoce aceros, tratamientos térmicos y planos." },
+];
+
+/** Espacios para fotografía real de FERKOR. Sin `src` = pendiente del cliente (no usar fotos de stock). */
+const photoSlots: { label: string; src?: string; alt?: string }[] = [
+  { label: "Responsable de FERKOR" },
+  { label: "Trabajo en taller", src: "/images/trabajos/rectificado-placas.webp", alt: "Piezas planas montadas para rectificado" },
+  { label: "Procesos industriales" },
+  { label: "Visitas técnicas" },
 ];
 
 export default function NosotrosPage() {
@@ -30,8 +40,8 @@ export default function NosotrosPage() {
         label="Nosotros"
         title="Conocimiento técnico,"
         accent="atención directa."
-        lead={`FERKOR se especializa en herramientas de corte para uso industrial: cuchillos y componentes para envasado, procesamiento de alimentos y papel y cartón, con mecanizado, repuestos y asesoría técnica. Atendemos desde ${company.coverage}.`}
-        product={{ src: "/images/herramientas/9d328c.webp", alt: "Piñón mecanizado" }}
+        lead={`FERKOR se especializa en herramientas de corte para uso industrial: cuchillos y componentes para envasado, procesamiento de alimentos y papel y cartón, con mecanizado, repuestos y asesoría técnica. ${company.coverage}.`}
+        product={{ src: "/images/trabajos/pinones.webp", alt: "Piñones mecanizados por FERKOR" }}
         actions={
           <Button href="/contacto" size="lg" arrow>
             Hablar con FERKOR
@@ -45,8 +55,8 @@ export default function NosotrosPage() {
             <BlockHeader index="01" label="Trayectoria" title={`≈ ${xp.years} años`} accent="en el sector." />
             <p className="mt-8 text-lg text-ink/75">
               {xp.owner}, responsable de FERKOR, acumula cerca de {xp.years} años en herramientas de corte industrial. Esa
-              experiencia en terreno es la base de cómo trabajamos: entender primero la máquina y el proceso, y después
-              proponer la pieza.
+              experiencia práctica es la base de cómo trabajamos: entender primero la máquina y el proceso productivo, y
+              después proponer la pieza.
             </p>
           </div>
           <ol className="border-t-2 border-ink lg:col-span-6 lg:col-start-7">
@@ -83,9 +93,21 @@ export default function NosotrosPage() {
 
       <section className="bg-white py-20 md:py-28">
         <div className="wrap">
-          <BlockHeader index="03" label="Trabajos" title="Piezas que" accent="hablan por nosotros." />
+          <BlockHeader index="03" label="Equipo y taller" title="Quienes" accent="están detrás." />
+          <ul className="mt-12 grid grid-cols-2 gap-px border border-line bg-line lg:grid-cols-4">
+            {photoSlots.map((p) => (
+              <li key={p.label} className="bg-white">
+                <figure>
+                  <div className="relative aspect-[4/5] overflow-hidden bg-paper">
+                    <ProductImage product={p.src ? { src: p.src, alt: p.alt ?? p.label } : undefined} icon="asesoria" sizes="(min-width: 1024px) 25vw, 50vw" cover />
+                  </div>
+                  <figcaption className="border-t border-line px-4 py-3 font-mono text-[11px] tracking-[0.06em] text-ink uppercase">{p.label}</figcaption>
+                </figure>
+              </li>
+            ))}
+          </ul>
           <div className="mt-12">
-            <CatalogStrip refs={["FK-DE-01", "FK-CI-03", "FK-ME-01", "FK-RE-01"]} />
+            <CatalogStrip refs={["FK-DE-10", "FK-CI-10", "FK-ME-10", "FK-RE-06"]} />
           </div>
         </div>
       </section>

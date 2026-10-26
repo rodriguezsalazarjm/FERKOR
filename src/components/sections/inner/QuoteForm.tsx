@@ -1,9 +1,11 @@
 "use client";
 
-import { useId, useState, type FormEvent } from "react";
+import { useState, type FormEvent } from "react";
+import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { Paperclip, X } from "lucide-react";
+import { MessageCircle } from "lucide-react";
 import { allServices } from "@/content/services";
+import { products } from "@/content/products";
 import { whatsappHref } from "@/content/company";
 
 const toolTypes = [
@@ -16,8 +18,6 @@ const toolTypes = [
   "Otro / no estoy seguro",
 ];
 
-const MAX_FILE_MB = 15;
-
 type Values = {
   nombre: string;
   empresa: string;
@@ -29,9 +29,12 @@ type Values = {
   cantidad: string;
   material: string;
 };
-type Errors = Partial<Record<keyof Values | "archivos", string>>;
+type Errors = Partial<Record<keyof Values | "consentimiento", string>>;
 
-function validate(v: Values, files: File[]): Errors {
+/** Servicio solicitado: servicios y líneas de producto. */
+const requestOptions = [...allServices, ...products].map((s) => s.title);
+
+function validate(v: Values, consent: boolean): Errors {
   const e: Errors = {};
   if (!v.nombre.trim()) e.nombre = "Ingresa tu nombre.";
   if (!v.empresa.trim()) e.empresa = "Ingresa el nombre de tu empresa.";
@@ -40,7 +43,7 @@ function validate(v: Values, files: File[]): Errors {
   if (!v.servicio) e.servicio = "Elige el servicio.";
   if (v.descripcion.trim().length < 15) e.descripcion = "Cuéntanos un poco más (mínimo 15 caracteres).";
   if (v.cantidad.trim() && !/^\d+$/.test(v.cantidad.trim())) e.cantidad = "Usa solo números.";
-  if (files.some((f) => f.size > MAX_FILE_MB * 1024 * 1024)) e.archivos = `Cada archivo debe pesar menos de ${MAX_FILE_MB} MB.`;
+  if (!consent) e.consentimiento = "Necesitamos tu autorización para responderte.";
   return e;
 }
 
@@ -52,7 +55,7 @@ function validate(v: Values, files: File[]): Errors {
 export function QuoteForm() {
   const params = useSearchParams();
   const pre = params.get("servicio") ?? "";
-  const preService = allServices.find((s) => s.title === pre || s.slug === pre)?.title ?? "";
+  const preService = [...allServices, ...products].find((s) => s.title === pre || s.slug === pre)?.title ?? "";
 
   const [values, setValues] = useState<Values>({
     nombre: "",
@@ -65,10 +68,9 @@ export function QuoteForm() {
     cantidad: "",
     material: "",
   });
-  const [files, setFiles] = useState<File[]>([]);
+  const [consent, setConsent] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
   const [ready, setReady] = useState(false);
-  const fileId = useId();
 
   const set = (k: keyof Values) => (ev: { target: { value: string } }) => {
     setValues((v) => ({ ...v, [k]: ev.target.value }));
@@ -77,7 +79,7 @@ export function QuoteForm() {
 
   const onSubmit = (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const e = validate(values, files);
+    const e = validate(values, consent);
     setErrors(e);
     if (Object.keys(e).length) {
       const first = Object.keys(e)[0];
@@ -104,18 +106,17 @@ export function QuoteForm() {
       values.cantidad && `Cantidad: ${values.cantidad}`,
       values.material && `Material: ${values.material}`,
       `Descripción: ${values.descripcion}`,
-      files.length ? `Archivos: ${files.map((f) => f.name).join(", ")}` : "",
     ]
       .filter(Boolean)
       .join("\n");
     const wa = whatsappHref(summary);
     return (
       <div id="q-summary" tabIndex={-1} className="scroll-mt-24 border-2 border-ink bg-white p-7 outline-none md:p-10" role="status">
-        <p className="mono-index text-red">Solicitud lista · envío pendiente de integración</p>
+        <p className="mono-index text-red">Solicitud lista · enviar por WhatsApp</p>
         <h2 className="display mt-4 text-4xl text-ink md:text-5xl">Revisa tu solicitud</h2>
         <p className="mt-4 max-w-xl text-ink/75">
           Esta versión del sitio todavía no envía formularios a FERKOR. Tus datos no se han enviado ni guardado.
-          {wa ? " Puedes enviarlos ahora por WhatsApp con un clic." : " Pronto podrás enviarlos desde aquí o por WhatsApp."}
+          {wa ? " Envíala por WhatsApp con un clic y adjunta en el chat las fotos o planos de la pieza." : " Pronto podrás enviarlos desde aquí o por WhatsApp."}
         </p>
         <pre className="mt-6 overflow-x-auto bg-paper p-5 font-mono text-[13px] leading-relaxed whitespace-pre-wrap text-ink">{summary}</pre>
         <div className="mt-6 flex flex-col gap-3 xs:flex-row">
@@ -140,14 +141,14 @@ export function QuoteForm() {
           <Field id="nombre" label="Nombre" required value={values.nombre} onChange={set("nombre")} error={errors.nombre} autoComplete="name" />
           <Field id="empresa" label="Empresa" required value={values.empresa} onChange={set("empresa")} error={errors.empresa} autoComplete="organization" />
           <Field id="correo" label="Correo" type="email" required value={values.correo} onChange={set("correo")} error={errors.correo} autoComplete="email" />
-          <Field id="whatsapp" label="WhatsApp" type="tel" value={values.whatsapp} onChange={set("whatsapp")} error={errors.whatsapp} autoComplete="tel" hint="Opcional. Te respondemos más rápido." />
+          <Field id="whatsapp" label="Teléfono / WhatsApp" type="tel" value={values.whatsapp} onChange={set("whatsapp")} error={errors.whatsapp} autoComplete="tel" hint="Opcional. Te respondemos más rápido." />
         </div>
       </fieldset>
 
       <fieldset className="mt-10">
         <legend className="mono-index text-red">02 · Tu requerimiento</legend>
         <div className="mt-5 grid gap-5 md:grid-cols-2">
-          <Select id="servicio" label="Servicio" required value={values.servicio} onChange={set("servicio")} error={errors.servicio} options={allServices.map((s) => s.title)} />
+          <Select id="servicio" label="Servicio" required value={values.servicio} onChange={set("servicio")} error={errors.servicio} options={requestOptions} />
           <Select id="herramienta" label="Tipo de herramienta o pieza" value={values.herramienta} onChange={set("herramienta")} options={toolTypes} />
           <div className="md:col-span-2">
             <Field
@@ -168,53 +169,48 @@ export function QuoteForm() {
 
       <fieldset className="mt-10">
         <legend className="mono-index text-red">03 · Fotos o planos</legend>
-        <label
-          htmlFor={fileId}
-          className="mt-5 flex cursor-pointer flex-col items-center justify-center gap-2 border border-dashed border-steel-line bg-paper px-6 py-8 text-center transition-colors hover:border-ink focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-ink"
-        >
-          <Paperclip size={22} strokeWidth={1.75} aria-hidden="true" />
-          <span className="font-semibold text-ink">Adjuntar fotografías o planos</span>
-          <span className="text-sm text-steel">JPG, PNG, PDF, DWG o DXF · máx. {MAX_FILE_MB} MB por archivo</span>
+        {/* Adjuntos por WhatsApp mientras no exista envío por servidor/correo (decisión del cliente, oct. 2026). */}
+        <div className="mt-5 flex gap-4 border border-dashed border-steel-line bg-paper px-5 py-6">
+          <MessageCircle size={22} strokeWidth={1.75} aria-hidden="true" className="mt-0.5 shrink-0 text-red" />
+          <p className="text-sm text-ink/80">
+            <span className="block font-semibold text-ink">Envía las fotos o planos de tu pieza por WhatsApp.</span>
+            Al revisar tu solicitud podrás enviarla por WhatsApp y adjuntar ahí las imágenes: una foto con una huincha al
+            lado nos ayuda a identificar la pieza.
+          </p>
+        </div>
+      </fieldset>
+
+      <div className="mt-8">
+        <label htmlFor="q-consentimiento" className="flex cursor-pointer gap-3 text-sm text-ink/80">
           <input
-            id={fileId}
-            type="file"
-            multiple
-            accept="image/*,.pdf,.dwg,.dxf"
-            className="sr-only"
-            aria-describedby={errors.archivos ? "q-archivos-msg" : undefined}
+            id="q-consentimiento"
+            type="checkbox"
+            checked={consent}
             onChange={(ev) => {
-              const list = Array.from(ev.target.files ?? []);
-              setFiles((f) => [...f, ...list]);
-              ev.target.value = "";
-              setErrors((e) => ({ ...e, archivos: undefined }));
+              setConsent(ev.target.checked);
+              setErrors((e) => ({ ...e, consentimiento: undefined }));
             }}
+            aria-describedby={errors.consentimiento ? "q-consentimiento-msg" : undefined}
+            className="mt-0.5 h-4 w-4 shrink-0 accent-red"
           />
+          <span>
+            Acepto que FERKOR use mis datos para responder esta solicitud, según la{" "}
+            <Link href="/privacidad" className="font-semibold text-ink underline underline-offset-2 hover:text-red">
+              política de privacidad
+            </Link>
+            . *
+          </span>
         </label>
-        {files.length > 0 && (
-          <ul className="mt-3 divide-y divide-line border border-line" aria-label="Archivos seleccionados">
-            {files.map((f, i) => (
-              <li key={`${f.name}-${i}`} className="flex items-center justify-between gap-4 px-4 py-2.5 text-sm">
-                <span className="truncate font-mono text-ink">{f.name}</span>
-                <span className="flex shrink-0 items-center gap-3">
-                  <span className="font-mono text-xs text-steel">{(f.size / 1024 / 1024).toFixed(1)} MB</span>
-                  <button type="button" onClick={() => setFiles((all) => all.filter((_, j) => j !== i))} className="p-1 text-steel hover:text-red" aria-label={`Quitar ${f.name}`}>
-                    <X size={16} />
-                  </button>
-                </span>
-              </li>
-            ))}
-          </ul>
-        )}
-        {errors.archivos && (
-          <p id="q-archivos-msg" className="mt-2 text-sm font-medium text-danger">
-            Error: {errors.archivos}
+        {errors.consentimiento && (
+          <p id="q-consentimiento-msg" className="mt-2 text-sm font-medium text-danger">
+            Error: {errors.consentimiento}
           </p>
         )}
-      </fieldset>
+      </div>
 
       <div className="mt-10 flex flex-col gap-4 border-t border-line pt-8 md:flex-row md:items-center md:justify-between">
         <p id="q-note" className="max-w-md text-sm text-steel">
-          Los campos marcados con * son obligatorios. Maqueta: el envío a FERKOR está pendiente de integración.
+          Los campos marcados con * son obligatorios. La solicitud se envía por WhatsApp; el envío por correo está pendiente de habilitar.
         </p>
         <button type="submit" className="chamfer-sm inline-flex min-h-13 items-center justify-center bg-red px-8 font-semibold text-white transition-colors hover:bg-red-hover">
           Revisar solicitud

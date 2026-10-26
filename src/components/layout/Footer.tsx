@@ -92,9 +92,9 @@ export function Footer() {
             © {company.copyrightYear} FERKOR · {company.descriptor} · {company.coverage}
           </p>
           <p className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono tracking-[0.04em]">
-            <span>
-              Información legal <Pending label="por validar" />
-            </span>
+            <Link href="/privacidad" className="hover:text-white">
+              Privacidad y cookies
+            </Link>
             <span>Sitio por UPZITES</span>
           </p>
         </div>

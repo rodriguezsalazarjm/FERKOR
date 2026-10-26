@@ -13,7 +13,7 @@ export function ProductLineCard({ product: p, size = "md" }: { product: Service;
       }`}
     >
       <div className={`relative overflow-hidden border-line ${lg ? "aspect-[16/10] border-b" : "aspect-[4/3] border-b sm:aspect-auto sm:min-h-[220px] sm:border-r sm:border-b-0"}`}>
-        <ProductImage product={p.product} icon={p.icon} sizes={lg ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 20vw, 100vw"} />
+        <ProductImage product={p.product} cover={p.product?.src.startsWith("/images/trabajos/")} icon={p.icon} sizes={lg ? "(min-width: 768px) 50vw, 100vw" : "(min-width: 768px) 20vw, 100vw"} />
         {lg && <span className="absolute top-4 left-4 bg-red px-2 py-1 font-mono text-[10px] tracking-[0.08em] text-white uppercase">Más solicitados</span>}
       </div>
       <div className={`flex flex-col ${lg ? "p-7 md:p-9" : "p-6"}`}>

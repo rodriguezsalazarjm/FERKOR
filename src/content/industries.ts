@@ -15,7 +15,7 @@ export type Industry = {
   featured?: boolean;
 };
 
-/** Sectores y aplicaciones. Sin nombres de clientes. */
+/** Sectores y aplicaciones. Los clientes atendidos están en `clients.ts`. */
 export const industries: Industry[] = [
   {
     slug: "envasado",
@@ -27,9 +27,10 @@ export const industries: Industry[] = [
       "Cuchillos zigzag para máquinas flow pack",
       "Rodamientos lineales y correas de arrastre",
       "Afilado de los cuchillos de la envasadora",
+      "Cuchillos de recambio para no detener la línea por desgaste",
     ],
     serviceSlugs: ["cuchillos-dentados-envasadora", "cuchillos-zigzag-flow-pack", "rodamientos-lineales"],
-    catalogRefs: ["FK-ZZ-01", "FK-DE-03", "FK-DE-01"],
+    catalogRefs: ["FK-ZZ-02", "FK-DE-07", "FK-DE-10", "FK-CO-01"],
     image: images.envasado,
     featured: true,
   },
@@ -37,10 +38,15 @@ export const industries: Industry[] = [
     slug: "alimentos",
     code: "IND-02",
     title: "Procesamiento de alimentos",
-    summary: "Cuchillos para el corte de productos alimenticios y repuestos para las líneas.",
-    needs: ["Cuchillos circulares y rectos para corte de producto", "Rectificación de cuchillos en uso", "Rodamientos y correas de arrastre"],
+    summary: "Cuchillos y cuchillas para el corte de productos alimenticios, su afilado y repuestos para las líneas.",
+    needs: [
+      "Cuchillos circulares y rectos para corte de producto",
+      "Cuchillas especiales según muestra o plano",
+      "Rectificación de cuchillos en uso",
+      "Rodamientos y correas de arrastre",
+    ],
     serviceSlugs: ["fabricacion", "rectificacion", "rodamientos-lineales"],
-    catalogRefs: ["FK-CI-01", "FK-DE-04", "FK-RP-01"],
+    catalogRefs: ["FK-ES-01", "FK-ES-02", "FK-CI-10", "FK-RP-01"],
   },
   {
     slug: "papel",
@@ -49,7 +55,7 @@ export const industries: Industry[] = [
     summary: "Cuchillos orbitales de gran diámetro, circulares y guillotinas para transformación de papel.",
     needs: ["Cuchillos orbitales para corte de grandes rollos", "Cuchillos circulares de corte y ranurado", "Cuchillos tipo guillotina"],
     serviceSlugs: ["fabricacion", "rectificacion"],
-    catalogRefs: ["FK-CI-03", "FK-CI-04", "FK-RE-03"],
+    catalogRefs: ["FK-CI-09", "FK-CI-04", "FK-RE-03"],
     image: images.papel,
   },
   {
@@ -67,9 +73,14 @@ export const industries: Industry[] = [
     code: "IND-05",
     title: "Otras aplicaciones industriales",
     summary: "Herramientas de corte, piezas mecanizadas y repuestos según requerimiento.",
-    needs: ["Cuchillos especiales según plano o muestra", "Ejes, piñones y piezas mecanizadas", "Rodamientos y correas de arrastre"],
+    needs: [
+      "Cuchillos especiales según plano o muestra",
+      "Ejes, piñones y piezas mecanizadas en acero, aluminio o polímero",
+      "Copia de repuestos que ya no se consiguen",
+      "Rodamientos y correas de arrastre",
+    ],
     serviceSlugs: ["fabricacion", "mecanizado-y-repuestos", "asesoria-tecnica"],
-    catalogRefs: ["FK-ME-01", "FK-ME-03"],
+    catalogRefs: ["FK-ME-10", "FK-ME-12", "FK-ME-13", "FK-ME-03"],
   },
 ];
 

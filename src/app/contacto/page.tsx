@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { company, whatsappHref } from "@/content/company";
+import { company, whatsappHref, waMessages } from "@/content/company";
 import { Pending } from "@/components/ui/Pending";
 import { PageHero } from "@/components/sections/inner/PageHero";
 import { QuoteForm } from "@/components/sections/inner/QuoteForm";
@@ -18,7 +18,7 @@ const tips = [
 ];
 
 export default function ContactoPage() {
-  const wa = whatsappHref("Hola FERKOR, quiero cotizar.");
+  const wa = whatsappHref(waMessages.general);
   return (
     <>
       <PageHero

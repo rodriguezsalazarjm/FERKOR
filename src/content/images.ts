@@ -1,7 +1,7 @@
 /**
  * Fotografía del sitio.
  *
- * Fotografía de AMBIENTE: referencias visuales provisionales de Unsplash
+ * `provisional: true` = referencia visual de Unsplash
  * (licencia Unsplash): no son trabajos, herramientas ni instalaciones de FERKOR.
  * La interfaz las marca como "Ref. visual". Las fotos reales de productos están en
  * `catalog.ts` (public/images/herramientas). Reemplazar estas por fotografía propia
@@ -17,9 +17,9 @@ const unsplash = (id: string) => `https://images.unsplash.com/photo-${id}`;
 
 export const images = {
   hero: {
-    src: unsplash("1727292486169-33eba0865c99"),
-    alt: "Macro de una herramienta de corte dentada de acero montada en máquina",
-    provisional: true,
+    src: "/images/trabajos/circular-dentado.webp",
+    alt: "Cuchillo circular dentado fabricado por FERKOR",
+    provisional: false,
   },
   fabricacion: {
     src: unsplash("1666634157070-6fd830fb5672"),
@@ -27,9 +27,9 @@ export const images = {
     provisional: true,
   },
   rectificacion: {
-    src: unsplash("1522322512347-a0e57fd1744c"),
-    alt: "Chispas durante el rectificado de una pieza metálica",
-    provisional: true,
+    src: "/images/trabajos/rectificado-placas.webp",
+    alt: "Piezas planas de acero montadas para rectificado en el taller",
+    provisional: false,
   },
   envasado: {
     src: unsplash("1779517935247-d6596bd653bf"),

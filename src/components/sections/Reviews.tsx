@@ -13,7 +13,7 @@ export function Reviews({ index = "09" }: { index?: string }) {
       <div className="wrap">
         <div className="flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <SectionLabel index={index}>Clientes</SectionLabel>
+            <SectionLabel index={index}>Testimonios</SectionLabel>
             <h2 id="reviews-title" className="display mt-6 text-[clamp(2.6rem,6vw,4.75rem)] text-ink">
               Lo que dicen{" "}
               <span className="block text-red">quienes producen con FERKOR.</span>
@@ -46,6 +46,10 @@ export function Reviews({ index = "09" }: { index?: string }) {
 function ReviewAuthor({ review: r, dark = false }: { review: (typeof reviews)[number]; dark?: boolean }) {
   return (
     <figcaption className="mt-8">
+      {r.image && (
+        // eslint-disable-next-line @next/next/no-img-element
+        <img src={r.image} alt="" loading="lazy" className={`mb-4 h-12 w-12 object-contain ${dark ? "bg-white p-1" : ""}`} />
+      )}
       <p className={`font-semibold ${dark ? "text-white" : "text-ink"}`}>{r.name}</p>
       <p className={`text-sm ${dark ? "text-white/70" : "text-ink/70"}`}>
         {r.role}

@@ -1,10 +1,10 @@
-import { whatsappHref } from "@/content/company";
+import { whatsappHref, waMessages } from "@/content/company";
 import { Button } from "@/components/ui/Button";
 import { TechnicalGrid } from "@/components/graphics/TechnicalGrid";
 
 /** "¿No sabes qué pieza es?": muchos clientes llegan con piezas que no saben identificar. */
 export function IdentifyBand() {
-  const wa = whatsappHref("Hola FERKOR, tengo una pieza que no sé identificar. Te envío una foto.");
+  const wa = whatsappHref(waMessages.identificar);
   return (
     <section aria-labelledby="identify-title" className="on-dark relative isolate overflow-hidden bg-red text-white">
       <TechnicalGrid className="text-white/[0.08]" minor={16} major={80} />

@@ -7,6 +7,7 @@ import type { Service } from "./services";
  * que la gente busca en Google: envasadora, selladora, zigzag, flow pack.
  */
 const img = (id: string) => `/images/herramientas/${id}.webp`;
+const job = (id: string) => `/images/trabajos/${id}.webp`;
 
 export const products: Service[] = [
   {
@@ -19,7 +20,7 @@ export const products: Service[] = [
     title: "Cuchillos dentados",
     summary: "Cortan la bolsa al envasar arroz, harina, pasta y otros productos. Fabricados a medida y afilados.",
     icon: "herramientas",
-    product: { src: img("e8fa22"), alt: "Cuchillo dentado con ranuras de fijación para envasadora" },
+    product: { src: job("dentado-recto-par"), alt: "Par de cuchillos dentados rectos para envasadora" },
     headline: ["Cuchillos dentados", "para envasadoras y selladoras."],
     intro:
       "Son los cuchillos que cortan la bolsa en las máquinas envasadoras: pasa el film con la cantidad de producto, el cuchillo dentado corta y la bolsa queda envasada y sellada. Los fabricamos según tu modelo y los afilamos cuando pierden el corte.",
@@ -29,12 +30,30 @@ export const products: Service[] = [
       { title: "Líneas de empaque", text: "Corte de film en procesos de envasado de alimentos y productos." },
     ],
     includes: [
-      { title: "Muchas formas, un mismo principio", text: "Rectos, curvos o circulares: lo que importa es el dentado. Lo fabricamos según tu modelo." },
+      { title: "Muchas formas, un mismo principio", text: "Rectos o circulares: lo que importa es el dentado. Lo fabricamos según tu modelo." },
       { title: "Fabricación a medida", text: "A partir de una muestra, una foto con medidas o el plano." },
       { title: "Afilado y rectificación", text: "Recuperamos el filo de tus cuchillos cuando la pieza lo permite." },
       { title: "Reposición", text: "Te ayudamos a tener cuchillos de recambio para no detener la línea." },
     ],
-    catalogRefs: ["FK-DE-03", "FK-DE-01", "FK-DE-04", "FK-ZZ-01"],
+    specs: {
+      intro:
+        "Datos con que identificamos y fabricamos un cuchillo dentado. Las medidas varían según la máquina y el producto: no son un listado cerrado de stock.",
+      rows: [
+        { label: "Paso entre dientes", value: null, note: "Según muestra o plano" },
+        { label: "Espesor", value: null, note: "Según muestra o plano" },
+        { label: "Largo", value: null, note: "Según la mordaza o portacuchillo" },
+        { label: "Ancho", value: null, note: "Según muestra o plano" },
+        { label: "Material de fabricación", value: null, note: "Se confirma al cotizar según la aplicación" },
+        { label: "Aplicación", value: "Corte de film en envasadoras verticales, selladoras y líneas de empaque" },
+        { label: "Formato", value: "Recto o circular, con ranuras o perforaciones de fijación" },
+      ],
+    },
+    // TODO(cliente): confirmar escritura exacta de las marcas (transcripción: "Volpack", "Tecmar", "Rovema") y modelos.
+    compatibility: {
+      brands: ["Volpak", "Tecmar", "Rovema"],
+      note: "Fabricamos cuchillos dentados compatibles con envasadoras de estas marcas, a partir de tu muestra o sus medidas. FERKOR no es distribuidor oficial ni fabricante autorizado de estas marcas; los nombres se usan solo para identificar la máquina.",
+    },
+    catalogRefs: ["FK-DE-07", "FK-DE-09", "FK-DE-08", "FK-DE-03", "FK-DE-10", "FK-DE-11"],
     quoteNeeds: [
       "Fotografía del cuchillo, ojalá con una huincha al lado",
       "Marca o tipo de envasadora, si lo sabes",
@@ -73,7 +92,7 @@ export const products: Service[] = [
     title: "Cuchillos zigzag",
     summary: "Cuchillos zigzag para máquinas flow pack: cortan y sellan cada empaque. A medida y con afilado.",
     icon: "afilado",
-    product: { src: img("107800"), alt: "Cuchillo zigzag para máquina flow pack" },
+    product: { src: job("zigzag-recto"), alt: "Juego de cuchillos zigzag para máquina flow pack" },
     headline: ["Cuchillos zigzag", "para máquinas flow pack."],
     intro:
       "Las máquinas flow pack, muy usadas en Chile, envasan en horizontal y cortan cada empaque con un cuchillo de dentado en zigzag que también ayuda a sellar. Fabricamos estos cuchillos a medida y los afilamos para que tu máquina vuelva a cortar limpio.",
@@ -88,7 +107,17 @@ export const products: Service[] = [
       { title: "Juegos de recambio", text: "Cuchillos de reposición para no detener la producción." },
       { title: "Identificación", text: "Si no sabes la medida, la levantamos desde tu cuchillo o en tu planta." },
     ],
-    catalogRefs: ["FK-ZZ-01", "FK-DE-03"],
+    specs: {
+      intro: "Con estos datos identificamos tu cuchillo zigzag. Si no los tienes, los levantamos desde la pieza.",
+      rows: [
+        { label: "Largo", value: null, note: "Según el ancho de la mordaza" },
+        { label: "Paso y altura del zigzag", value: null, note: "Según muestra o plano" },
+        { label: "Ancho y espesor", value: null, note: "Según muestra o plano" },
+        { label: "Aplicación", value: "Corte y sellado en flow pack horizontal y envasadoras" },
+        { label: "Máquina compatible", value: null, note: "Indícanos marca y modelo de tu flow pack" },
+      ],
+    },
+    catalogRefs: ["FK-ZZ-02", "FK-ZZ-01", "FK-DE-07"],
     quoteNeeds: [
       "Fotografía del cuchillo zigzag con una huincha al lado",
       "Marca y modelo de la flow pack, si lo sabes",
@@ -125,7 +154,7 @@ export const products: Service[] = [
     code: "PR-03",
     need: "Repuestos para envasadoras",
     title: "Rodamientos lineales",
-    summary: "Rodamientos de carro, lineales de bolas y de fricción, y el repuesto interior que se desgasta.",
+    summary: "Rodamientos de carro, lineales de bolas y de fricción, y el inserto interior que se desgasta. Consulta por medida.",
     icon: "precision",
     product: { src: img("7946f4"), alt: "Rodamiento lineal de fricción" },
     headline: ["Rodamientos lineales,", "de carro y de fricción."],

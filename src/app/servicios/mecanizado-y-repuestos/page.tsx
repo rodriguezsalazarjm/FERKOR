@@ -4,7 +4,7 @@ import { ServiceDetail } from "@/components/sections/inner/ServiceDetail";
 
 const service = getService("mecanizado-y-repuestos")!;
 
-export const metadata: Metadata = { title: service.title, description: service.summary };
+export const metadata: Metadata = { title: service.seo?.title ?? service.title, description: service.seo?.description ?? service.summary, alternates: { canonical: service.href } };
 
 export default function Page() {
   return <ServiceDetail service={service} />;

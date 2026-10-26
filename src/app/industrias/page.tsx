@@ -5,12 +5,13 @@ import { products } from "@/content/products";
 import { Button } from "@/components/ui/Button";
 import { Photo } from "@/components/ui/Photo";
 import { PageHero } from "@/components/sections/inner/PageHero";
-import { CatalogStrip, ServiceLink } from "@/components/sections/inner/Blocks";
+import { BlockHeader, CatalogStrip, ServiceLink } from "@/components/sections/inner/Blocks";
+import { ClientLogos } from "@/components/sections/ClientLogos";
 import { FinalCta } from "@/components/sections/home/FinalCta";
 
 export const metadata: Metadata = {
   title: "Industrias",
-  description: "Cuchillos industriales y repuestos para envasado alimentario, procesamiento de alimentos, papel y cartón, empaques y otras industrias.",
+  description: "Cuchillos industriales, afilado y repuestos para envasado alimentario, procesamiento de alimentos, papel y cartón, empaques y otras industrias en Chile.",
 };
 
 export default function IndustriasPage() {
@@ -37,9 +38,24 @@ export default function IndustriasPage() {
         </nav>
       </PageHero>
 
+      <section aria-label="Empresas atendidas" className="border-b border-line bg-white py-20 md:py-24">
+        <div className="wrap">
+          <BlockHeader
+            index="00"
+            label="Empresas atendidas"
+            title="Han confiado"
+            accent="en FERKOR."
+            lead={<p>Empresas de alimentos, panificación y envasado para las que hemos fabricado, afilado o suministrado piezas.</p>}
+          />
+          <div className="mt-12">
+            <ClientLogos variant="color" />
+          </div>
+        </div>
+      </section>
+
       {industries.map((ind, n) => {
         const related = [...products, ...allServices].filter((s) => ind.serviceSlugs.includes(s.slug));
-        const tone = n % 2 === 0 ? "bg-white" : "bg-paper";
+        const tone = n % 2 === 0 ? "bg-paper" : "bg-white";
         return (
           <section key={ind.slug} id={ind.slug} aria-labelledby={`${ind.slug}-t`} className={`scroll-mt-20 py-20 md:py-24 ${tone}`}>
             <div className="wrap grid gap-10 lg:grid-cols-12 lg:gap-8">

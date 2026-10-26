@@ -63,7 +63,7 @@ function NeedCard({ service: s, n }: { service: Service; n: number }) {
         <span className="font-display text-xl leading-none font-bold text-ink uppercase">“{s.need}”</span>
       </p>
       <div className="relative aspect-[4/3] overflow-hidden border-b border-line bg-white">
-        <ProductImage product={s.product} icon={s.icon} sizes="(min-width: 1024px) 33vw, 100vw" />
+        <ProductImage product={s.product} cover={s.product?.src.startsWith("/images/trabajos/")} icon={s.icon} sizes="(min-width: 1024px) 33vw, 100vw" />
       </div>
       <div className="flex flex-1 flex-col p-6 md:p-7">
         <div className="flex items-start justify-between gap-4">

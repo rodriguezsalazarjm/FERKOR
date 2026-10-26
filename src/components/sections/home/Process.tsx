@@ -1,15 +1,15 @@
 import { processSteps } from "@/content/home";
-import { whatsappHref } from "@/content/company";
+import { whatsappHref, waMessages } from "@/content/company";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { Button } from "@/components/ui/Button";
 import { BlueprintPattern } from "@/components/graphics/BlueprintPattern";
 import { FerkorIcon, type FerkorIconName } from "@/components/graphics/FerkorIcon";
 
-const stepIcons: FerkorIconName[] = ["planos", "precision", "respuesta"];
+const stepIcons: FerkorIconName[] = ["planos", "cotizacion", "fabricacion", "respuesta"];
 
-/** "Cotiza en 3 pasos" sobre azul blueprint: etapas unidas por una línea de cota. */
+/** Proceso comercial en 4 pasos sobre azul blueprint: etapas unidas por una línea de cota. */
 export function Process() {
-  const wa = whatsappHref("Hola FERKOR, quiero cotizar. Adjunto foto/plano de la pieza.");
+  const wa = whatsappHref(waMessages.general);
   return (
     <section aria-labelledby="proceso-title" className="on-dark relative isolate overflow-hidden bg-blueprint py-20 text-white md:py-28 lg:py-32">
       <BlueprintPattern tone="blueprint" drawing="circular" titleBlock code="FK-PR-03" drawingClassName="top-[-30%] right-[-18%] h-[95%] opacity-35 lg:top-[-36%] lg:right-[-8%] lg:h-[120%]" />
@@ -19,18 +19,18 @@ export function Process() {
           Cómo cotizar
         </SectionLabel>
         <h2 id="proceso-title" className="display mt-6 max-w-3xl text-[clamp(2.6rem,6vw,4.75rem)]">
-          Cotiza en{" "}
-          <span className="block text-red-light">3 pasos.</span>
+          De la foto a tu línea,{" "}
+          <span className="block text-red-light">en 4 pasos.</span>
         </h2>
 
-        <ol className="relative mt-16 grid gap-0 md:mt-24 lg:grid-cols-3">
+        <ol className="relative mt-16 grid gap-0 md:mt-24 lg:grid-cols-4">
           {/* Línea de cota que une las etapas (escritorio) */}
           <span className="grow-x absolute top-[27px] right-0 left-0 hidden h-px bg-white/45 lg:block" aria-hidden="true" />
           <span className="absolute top-[21px] left-0 hidden h-3 w-px bg-white/70 lg:block" aria-hidden="true" />
           <span className="absolute top-[21px] right-0 hidden h-3 w-px bg-white/70 lg:block" aria-hidden="true" />
 
           {processSteps.map((s, i) => (
-            <li key={s.n} className="relative grid grid-cols-[56px_1fr] gap-5 pb-12 last:pb-0 lg:block lg:pr-10 lg:pb-0">
+            <li key={s.n} className="relative grid grid-cols-[56px_1fr] gap-5 pb-12 last:pb-0 lg:block lg:pr-8 lg:pb-0">
               {i < processSteps.length - 1 && (
                 <span className="absolute top-14 bottom-0 left-[27px] w-px bg-white/30 lg:hidden" aria-hidden="true" />
               )}

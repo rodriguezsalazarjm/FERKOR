@@ -23,7 +23,7 @@ export default function ProductosPage() {
         title="Cuchillos y repuestos"
         accent="para envasadoras."
         lead="Cuchillos dentados y zigzag para envasadoras, selladoras y flow pack, y los repuestos que mantienen tu línea andando: rodamientos lineales y correas de arrastre."
-        product={{ src: "/images/herramientas/107800.webp", alt: "Cuchillo zigzag para máquina flow pack" }}
+        product={{ src: "/images/trabajos/zigzag-recto.webp", alt: "Juego de cuchillos zigzag para máquina flow pack" }}
         actions={
           <Button href="/contacto" size="lg" arrow>
             Cotizar con una foto

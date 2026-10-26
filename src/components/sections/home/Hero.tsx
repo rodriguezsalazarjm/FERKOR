@@ -52,7 +52,7 @@ export function Hero() {
 
           <p className="hero-in mt-7 max-w-[34rem] text-lg leading-relaxed text-white/85 md:text-xl md:leading-[1.55]" style={{ "--i": 0 } as React.CSSProperties}>
             Fabricamos y afilamos los cuchillos de tus envasadoras, selladoras y máquinas flow pack, más rodamientos y
-            correas de arrastre. Envíanos una foto y te cotizamos en {company.city}.
+            correas de arrastre. Envíanos una foto y te cotizamos desde {company.city} para todo Chile.
           </p>
 
           <div className="hero-in mt-9 flex flex-col gap-3 xs:flex-row xs:flex-wrap" style={{ "--i": 1 } as React.CSSProperties}>
@@ -76,11 +76,12 @@ export function Hero() {
           </nav>
         </div>
 
-        {/* Franja inferior de datos: solo información confirmada */}
-        <dl className="hero-in relative grid grid-cols-3 border-t border-white/15 lg:max-w-[42vw]" style={{ "--i": 3 } as React.CSSProperties}>
-          <HeroFact term="Trayectoria" value={<CountUp to={10} prefix="≈ " suffix=" años" />} note="en el sector" />
-          <HeroFact term="Modelo" value="B2B" note="atención directa" className="border-l border-white/15 pl-3 sm:pl-6" />
-          <HeroFact term="Base" value="Santiago" note="de Chile" className="border-l border-white/15 pl-3 sm:pl-6" />
+        {/* Barra de confianza: solo información confirmada. Sin plazos garantizados. */}
+        <dl className="hero-in relative grid grid-cols-2 border-t border-white/15 sm:grid-cols-4 lg:max-w-[46vw]" style={{ "--i": 3 } as React.CSSProperties}>
+          <HeroFact term="Experiencia" value={<CountUp to={company.experience.years} suffix=" años" />} note="Soluciones industriales y herramientas de corte" />
+          <HeroFact term="Atención" value="B2B" note="Para empresas y procesos productivos" className="border-white/15 pl-3 sm:border-l sm:pl-5" />
+          <HeroFact term="Cobertura" value="Nacional" note="Desde Santiago para todo Chile" className="border-t border-white/15 sm:border-t-0 sm:border-l sm:pl-5" />
+          <HeroFact term="Urgencias" value="Directo" note="Atención directa para necesidades urgentes de producción" className="border-t border-l border-white/15 pl-3 sm:border-t-0 sm:pl-5" />
         </dl>
       </div>
 
@@ -92,9 +93,11 @@ export function Hero() {
       </div>
 
       <TitleBlock code="FK-HERO-01" className="absolute right-6 bottom-6 hidden text-white/55 xl:block" />
-      <div className="absolute top-4 right-4 hidden lg:block">
-        <ProvisionalBadge />
-      </div>
+      {images.hero.provisional && (
+        <div className="absolute top-4 right-4 hidden lg:block">
+          <ProvisionalBadge />
+        </div>
+      )}
     </section>
   );
 }
@@ -104,8 +107,8 @@ function HeroFact({ term, value, note, className = "" }: { term: string; value: 
     <div className={`min-w-0 py-5 pr-2 sm:pr-4 ${className}`}>
       <dt className="mono-index text-[10px] text-steel-light sm:text-xs">{term}</dt>
       <dd className="mt-2">
-        <span className="block font-display text-[1.6rem] leading-none font-extrabold whitespace-nowrap uppercase sm:text-3xl lg:text-4xl">{value}</span>
-        <span className="mt-1 block text-xs text-white/60 sm:text-sm">{note}</span>
+        <span className="block font-display text-[1.6rem] leading-none font-extrabold whitespace-nowrap uppercase sm:text-3xl">{value}</span>
+        <span className="mt-1.5 block text-xs leading-snug text-white/60">{note}</span>
       </dd>
     </div>
   );

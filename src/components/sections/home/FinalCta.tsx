@@ -1,4 +1,4 @@
-import { whatsappHref } from "@/content/company";
+import { whatsappHref, waMessages } from "@/content/company";
 import { Button } from "@/components/ui/Button";
 import { BlueprintPattern } from "@/components/graphics/BlueprintPattern";
 import { CutGeometry } from "@/components/graphics/CutGeometry";
@@ -6,7 +6,7 @@ import { Pending } from "@/components/ui/Pending";
 
 /** CTA final: bloque negro con geometría técnica blanca, montado sobre el corte blanco/negro del pie. */
 export function FinalCta() {
-  const wa = whatsappHref("Hola FERKOR, quiero cotizar una herramienta de corte.");
+  const wa = whatsappHref(waMessages.general);
   return (
     <section aria-labelledby="cta-title" className="relative bg-[linear-gradient(to_bottom,var(--color-white)_50%,var(--color-ink)_50%)]">
       <div className="wrap">

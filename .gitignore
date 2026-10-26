@@ -45,3 +45,6 @@ next-env.d.ts
 
 # referencias de marca (no necesarias para el build; repo puede ser público)
 /docs/referencias/
+
+# Fotos originales del cliente (sin retocar, con marcas de terceros): no publicar
+/originales/
