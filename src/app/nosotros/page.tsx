@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { images } from "@/content/images";
 import { company } from "@/content/company";
 import { differentials } from "@/content/home";
 import { Button } from "@/components/ui/Button";
@@ -36,6 +37,7 @@ export default function NosotrosPage() {
   return (
     <>
       <PageHero
+        background={images.tallerRectificado}
         index="P1"
         label="Nosotros"
         title="Conocimiento técnico,"

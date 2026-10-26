@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { images } from "@/content/images";
 import Link from "next/link";
 import { services, advisory } from "@/content/services";
 import { complementaryProducts } from "@/content/products";
@@ -20,6 +21,7 @@ export default function ServiciosPage() {
   return (
     <>
       <PageHero
+        background={images.fabricacion}
         index="P2"
         label="Servicios"
         title="Elige tu caso."

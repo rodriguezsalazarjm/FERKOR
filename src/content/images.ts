@@ -31,6 +31,18 @@ export const images = {
     alt: "Piezas planas de acero montadas para rectificado en el taller",
     provisional: false,
   },
+  /** Fondo de portadas interiores (contacto). */
+  chispas: {
+    src: unsplash("1522322512347-a0e57fd1744c"),
+    alt: "Chispas al cortar una pieza de acero con disco abrasivo",
+    provisional: true,
+  },
+  /** Fondo de portadas interiores (nosotros): foto real del taller. */
+  tallerRectificado: {
+    src: "/images/trabajos/rectificado-disco-grande.webp",
+    alt: "Cuchillo circular de gran diámetro montado para rectificado",
+    provisional: false,
+  },
   envasado: {
     src: unsplash("1779517935247-d6596bd653bf"),
     alt: "Línea de envasado industrial con cinta transportadora",

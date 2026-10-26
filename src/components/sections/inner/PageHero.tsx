@@ -4,6 +4,8 @@ import type { ReactNode } from "react";
 import { SectionLabel } from "@/components/ui/SectionLabel";
 import { TechnicalGrid } from "@/components/graphics/TechnicalGrid";
 import { CutGeometry } from "@/components/graphics/CutGeometry";
+import { Photo } from "@/components/ui/Photo";
+import type { SiteImage } from "@/content/images";
 
 type Props = {
   index: string;
@@ -16,13 +18,24 @@ type Props = {
   actions?: ReactNode;
   /** Producto real sobre blanco a la derecha (desktop). */
   product?: { src: string; alt: string };
+  /** Fotografía de ambiente detrás del titular (taller, chispas, mecanizado). */
+  background?: SiteImage;
   children?: ReactNode;
 };
 
 /** Portada de página interior: bloque negro con retícula, titular de dos tonos y producto real opcional. */
-export function PageHero({ index, label, title, accent, lead, trail = [], actions, product, children }: Props) {
+export function PageHero({ index, label, title, accent, lead, trail = [], actions, product, background, children }: Props) {
   return (
     <section className="on-dark relative isolate overflow-hidden bg-ink text-white">
+      {background && (
+        <>
+          <div className="absolute inset-0 -z-10">
+            <Photo image={background} sizes="100vw" priority className="h-full w-full" imgClassName="hero-settle opacity-80" badgePosition="br" />
+          </div>
+          <div className="absolute inset-0 -z-10 bg-linear-to-r from-ink via-ink/75 to-ink/0" aria-hidden="true" />
+          <div className="absolute inset-0 -z-10 bg-linear-to-t from-ink/70 via-transparent to-transparent" aria-hidden="true" />
+        </>
+      )}
       <TechnicalGrid className="text-white/[0.045]" minor={16} major={80} />
       <div className="wrap relative grid gap-12 py-14 md:py-20 lg:grid-cols-12 lg:items-center lg:gap-8 lg:py-24">
         <div className={product ? "lg:col-span-7" : "lg:col-span-9"}>

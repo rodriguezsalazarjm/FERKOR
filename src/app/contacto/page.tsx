@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import { images } from "@/content/images";
 import { Suspense } from "react";
 import { company, whatsappHref, waMessages } from "@/content/company";
 import { Pending } from "@/components/ui/Pending";
@@ -22,6 +23,7 @@ export default function ContactoPage() {
   return (
     <>
       <PageHero
+        background={images.chispas}
         index="P9"
         label="Contacto"
         title="Cuéntanos qué"

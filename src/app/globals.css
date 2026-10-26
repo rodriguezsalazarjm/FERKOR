@@ -344,9 +344,6 @@
 .marquee-wrap:hover .marquee {
   animation-play-state: paused;
 }
-.marquee-slow {
-  animation-duration: 55s;
-}
 
 /* Burbuja del botón flotante de WhatsApp */
 @keyframes wa-bubble-in {
