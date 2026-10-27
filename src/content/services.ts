@@ -85,7 +85,7 @@ export const services: Service[] = [
         { label: "Material y tratamiento", value: null, note: "Se propone según la aplicación al cotizar" },
       ],
     },
-    catalogRefs: ["FK-DE-10", "FK-ZZ-02", "FK-DE-07", "FK-CI-10", "FK-DE-11", "FK-RE-06", "FK-CI-09", "FK-ES-01"],
+    catalogRefs: ["FK-CI-01", "FK-ZZ-02", "FK-DE-07", "FK-CI-10", "FK-DE-11", "FK-RE-06", "FK-CI-09", "FK-ES-01"],
     quoteNeeds: [
       "Plano, muestra o fotografías del cuchillo",
       "Medidas principales (largo, ancho, espesor o diámetro)",
@@ -189,7 +189,7 @@ export const services: Service[] = [
     ],
     gallery: [
       { label: "Piezas mecanizadas en serie", src: job("piezas-mecanizadas-serie"), alt: "Piezas de acero mecanizadas apiladas" },
-      { label: "Pieza terminada", src: job("pieza-mecanizada-buje"), alt: "Pieza de aluminio mecanizada con rebajes y perforaciones" },
+      { label: "Pieza terminada", src: job("pieza-polimero"), alt: "Pieza de polímero blanco mecanizada" },
       { label: "Equipos utilizados" },
       { label: "Pieza durante el mecanizado" },
     ],

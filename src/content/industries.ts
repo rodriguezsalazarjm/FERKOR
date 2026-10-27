@@ -30,7 +30,7 @@ export const industries: Industry[] = [
       "Cuchillos de recambio para no detener la línea por desgaste",
     ],
     serviceSlugs: ["cuchillos-dentados-envasadora", "cuchillos-zigzag-flow-pack", "rodamientos-lineales"],
-    catalogRefs: ["FK-ZZ-02", "FK-DE-07", "FK-DE-10", "FK-CO-01"],
+    catalogRefs: ["FK-ZZ-02", "FK-DE-07", "FK-DE-11", "FK-CO-01"],
     image: images.envasado,
     featured: true,
   },
@@ -55,7 +55,7 @@ export const industries: Industry[] = [
     summary: "Cuchillos orbitales de gran diámetro, circulares y guillotinas para transformación de papel.",
     needs: ["Cuchillos orbitales para corte de grandes rollos", "Cuchillos circulares de corte y ranurado", "Cuchillos tipo guillotina"],
     serviceSlugs: ["fabricacion", "rectificacion"],
-    catalogRefs: ["FK-CI-09", "FK-CI-04", "FK-RE-03"],
+    catalogRefs: ["FK-CI-01", "FK-CI-09", "FK-CI-04", "FK-RE-03"],
     image: images.papel,
   },
   {
@@ -65,7 +65,7 @@ export const industries: Industry[] = [
     summary: "Corte y prepicado de film para fabricación de empaques y bolsas.",
     needs: ["Cuchillos de corte y prepicado de film", "Cuchillos rectos y dentados para confección"],
     serviceSlugs: ["cuchillos-dentados-envasadora", "fabricacion"],
-    catalogRefs: ["FK-DE-08", "FK-RE-06"],
+    catalogRefs: ["FK-DE-07", "FK-RE-06"],
     image: images.empaques,
   },
   {

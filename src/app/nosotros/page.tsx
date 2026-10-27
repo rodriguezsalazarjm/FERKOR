@@ -109,7 +109,7 @@ export default function NosotrosPage() {
             ))}
           </ul>
           <div className="mt-12">
-            <CatalogStrip refs={["FK-DE-10", "FK-CI-10", "FK-ME-10", "FK-RE-06"]} />
+            <CatalogStrip refs={["FK-DE-07", "FK-CI-10", "FK-ME-10", "FK-RE-06"]} />
           </div>
         </div>
       </section>

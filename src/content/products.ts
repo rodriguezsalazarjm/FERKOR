@@ -20,7 +20,7 @@ export const products: Service[] = [
     title: "Cuchillos dentados",
     summary: "Cortan la bolsa al envasar arroz, harina, pasta y otros productos. Fabricados a medida y afilados.",
     icon: "herramientas",
-    product: { src: job("dentado-recto-par"), alt: "Par de cuchillos dentados rectos para envasadora" },
+    product: { src: job("dentado-recto-horquilla"), alt: "Cuchillo dentado recto con horquilla de montaje para envasadora" },
     headline: ["Cuchillos dentados", "para envasadoras y selladoras."],
     intro:
       "Son los cuchillos que cortan la bolsa en las máquinas envasadoras: pasa el film con la cantidad de producto, el cuchillo dentado corta y la bolsa queda envasada y sellada. Los fabricamos según tu modelo y los afilamos cuando pierden el corte.",
@@ -53,7 +53,7 @@ export const products: Service[] = [
       brands: ["Volpak", "Tecmar", "Rovema"],
       note: "Fabricamos cuchillos dentados compatibles con envasadoras de estas marcas, a partir de tu muestra o sus medidas. FERKOR no es distribuidor oficial ni fabricante autorizado de estas marcas; los nombres se usan solo para identificar la máquina.",
     },
-    catalogRefs: ["FK-DE-07", "FK-DE-09", "FK-DE-08", "FK-DE-10", "FK-DE-11"],
+    catalogRefs: ["FK-DE-07", "FK-DE-09", "FK-DE-11"],
     quoteNeeds: [
       "Fotografía del cuchillo, ojalá con una huincha al lado",
       "Marca o tipo de envasadora, si lo sabes",
@@ -117,7 +117,7 @@ export const products: Service[] = [
         { label: "Máquina compatible", value: null, note: "Indícanos marca y modelo de tu flow pack" },
       ],
     },
-    catalogRefs: ["FK-ZZ-02", "FK-DE-07", "FK-DE-08"],
+    catalogRefs: ["FK-ZZ-02", "FK-DE-07"],
     quoteNeeds: [
       "Fotografía del cuchillo zigzag con una huincha al lado",
       "Marca y modelo de la flow pack, si lo sabes",
