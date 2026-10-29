@@ -15,12 +15,8 @@ export const company = {
   contact: {
     /** WhatsApp comercial confirmado por el cliente (oct. 2026), formato internacional sin "+". */
     whatsapp: "56984907589" as string | null,
-    /**
-     * Correo público. Dejar en `null` hasta que el buzón exista.
-     * TODO(cliente): cuando `plannedEmail` esté creado y probado, copiarlo aquí.
-     */
-    email: null as string | null,
-    plannedEmail: "ventas@ferkor.cl",
+    /** Correo definitivo confirmado por el cliente (oct. 2026). Buzón en Titan (HostGator); recibe el formulario. */
+    email: "contacto@ferkor.cl" as string | null,
     phone: null as string | null,
     hours: null as string | null,
   },

@@ -66,9 +66,9 @@ Sistema en `src/app/globals.css` (sección "Sistema de movimiento"), sin librer�
 | Reseñas de clientes reales (mín. 3, con autorización) | `src/content/reviews.ts` | La sección no se muestra hasta tener 3 |
 | Plazo de respuesta que puedan cumplir (ej. 24 h hábiles) | textos de Contacto / Proceso | No se promete plazo |
 | Confirmar si fabrican en taller propio o aliado | `src/app/nosotros/page.tsx` | Textos neutros ("fabricamos", según documento del cliente) |
-| Integración del formulario de cotización (correo/CRM) | `src/components/sections/inner/QuoteForm.tsx` | Muestra resumen; no envía datos |
+| Contraseña SMTP del buzón contacto@ferkor.cl | Vercel → env `SMTP_PASS` (opcional `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`) | Sin ella el formulario ofrece WhatsApp/correo como alternativa |
 | Número de WhatsApp | `src/content/company.ts` → `contact.whatsapp` | Marcado "número por confirmar"; el botón se activa solo al cargarlo |
-| Correo, teléfono, horario | `src/content/company.ts` → `contact` | Marcado "pendiente" |
+| Teléfono, horario | `src/content/company.ts` → `contact` | Marcado "pendiente" (correo: contacto@ferkor.cl) |
 | Razón social, RUT, textos legales | `src/content/company.ts` → `legal` | "Información legal por validar" |
 | Redes sociales confirmadas | `src/content/company.ts` → `social` | No se muestran |
 | Fotografía de ambiente propia (rectificación, taller, medición, Johel si autoriza) | `public/images` + `src/content/images.ts` | Hero, rectificación e industrias siguen con imágenes de Unsplash marcadas "Ref. visual" |

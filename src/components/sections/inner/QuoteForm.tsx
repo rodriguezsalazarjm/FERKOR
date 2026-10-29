@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useState, useTransition, type FormEvent } from "react";
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
 import { MessageCircle } from "lucide-react";
 import { allServices } from "@/content/services";
 import { products } from "@/content/products";
-import { whatsappHref } from "@/content/company";
+import { company, whatsappHref } from "@/content/company";
+import { quoteSummary, validateQuote, type QuoteErrors, type QuoteValues } from "@/lib/quote";
+import { sendQuote, type SendQuoteResult } from "@/app/contacto/actions";
 
 const toolTypes = [
   "Cuchillo circular",
@@ -18,39 +20,16 @@ const toolTypes = [
   "Otro / no estoy seguro",
 ];
 
-type Values = {
-  nombre: string;
-  empresa: string;
-  correo: string;
-  whatsapp: string;
-  servicio: string;
-  herramienta: string;
-  descripcion: string;
-  cantidad: string;
-  material: string;
-};
-type Errors = Partial<Record<keyof Values | "consentimiento", string>>;
+type Values = QuoteValues;
+type Errors = QuoteErrors;
 
 /** Servicio solicitado: servicios y líneas de producto. */
 const requestOptions = [...allServices, ...products].map((s) => s.title);
 
-function validate(v: Values, consent: boolean): Errors {
-  const e: Errors = {};
-  if (!v.nombre.trim()) e.nombre = "Ingresa tu nombre.";
-  if (!v.empresa.trim()) e.empresa = "Ingresa el nombre de tu empresa.";
-  if (!/^\S+@\S+\.\S+$/.test(v.correo.trim())) e.correo = "Ingresa un correo válido.";
-  if (v.whatsapp.trim() && !/^[+\d\s()-]{8,}$/.test(v.whatsapp.trim())) e.whatsapp = "Revisa el número (ej. +56 9 1234 5678).";
-  if (!v.servicio) e.servicio = "Elige el servicio.";
-  if (v.descripcion.trim().length < 15) e.descripcion = "Cuéntanos un poco más (mínimo 15 caracteres).";
-  if (v.cantidad.trim() && !/^\d+$/.test(v.cantidad.trim())) e.cantidad = "Usa solo números.";
-  if (!consent) e.consentimiento = "Necesitamos tu autorización para responderte.";
-  return e;
-}
-
 /**
- * Formulario de cotización B2B (maqueta).
- * El envío al servidor está PENDIENTE de integración: al validar se muestra un
- * resumen y la alternativa por WhatsApp. No se simula un envío exitoso.
+ * Formulario de cotización B2B.
+ * Se envía por correo a FERKOR (Server Action `sendQuote`). Si el envío falla o no
+ * está configurado, se muestra el resumen con la alternativa por WhatsApp.
  */
 export function QuoteForm() {
   const params = useSearchParams();
@@ -70,7 +49,9 @@ export function QuoteForm() {
   });
   const [consent, setConsent] = useState(false);
   const [errors, setErrors] = useState<Errors>({});
-  const [ready, setReady] = useState(false);
+  const [result, setResult] = useState<SendQuoteResult | null>(null);
+  const [honeypot, setHoneypot] = useState("");
+  const [sending, startSending] = useTransition();
 
   const set = (k: keyof Values) => (ev: { target: { value: string } }) => {
     setValues((v) => ({ ...v, [k]: ev.target.value }));
@@ -79,44 +60,70 @@ export function QuoteForm() {
 
   const onSubmit = (ev: FormEvent<HTMLFormElement>) => {
     ev.preventDefault();
-    const e = validate(values, consent);
+    const e = validateQuote(values, consent);
     setErrors(e);
     if (Object.keys(e).length) {
       const first = Object.keys(e)[0];
       document.getElementById(`q-${first}`)?.focus();
       return;
     }
-    setReady(true);
-    requestAnimationFrame(() => {
-      const el = document.getElementById("q-summary");
-      el?.scrollIntoView({ block: "start" });
-      el?.focus({ preventScroll: true });
+    startSending(async () => {
+      let r: SendQuoteResult;
+      try {
+        r = await sendQuote(values, consent, honeypot);
+      } catch {
+        r = { ok: false, reason: "failed" };
+      }
+      setResult(r);
+      requestAnimationFrame(() => {
+        const el = document.getElementById("q-summary");
+        el?.scrollIntoView({ block: "start" });
+        el?.focus({ preventScroll: true });
+      });
     });
   };
 
-  if (ready) {
-    const summary = [
-      `Cotización FERKOR`,
-      `Nombre: ${values.nombre}`,
-      `Empresa: ${values.empresa}`,
-      `Correo: ${values.correo}`,
-      values.whatsapp && `WhatsApp: ${values.whatsapp}`,
-      `Servicio: ${values.servicio}`,
-      values.herramienta && `Herramienta: ${values.herramienta}`,
-      values.cantidad && `Cantidad: ${values.cantidad}`,
-      values.material && `Material: ${values.material}`,
-      `Descripción: ${values.descripcion}`,
-    ]
-      .filter(Boolean)
-      .join("\n");
-    const wa = whatsappHref(summary);
+  if (result?.ok) {
+    const wa = whatsappHref(`Hola FERKOR, soy ${values.nombre} de ${values.empresa}. Acabo de enviar una cotización por la web; les adjunto fotos o planos de la pieza.`);
     return (
       <div id="q-summary" tabIndex={-1} className="scroll-mt-24 border-2 border-ink bg-white p-7 outline-none md:p-10" role="status">
-        <p className="mono-index text-red">Solicitud lista · enviar por WhatsApp</p>
-        <h2 className="display mt-4 text-4xl text-ink md:text-5xl">Revisa tu solicitud</h2>
+        <p className="mono-index text-red">Solicitud enviada</p>
+        <h2 className="display mt-4 text-4xl text-ink md:text-5xl">Recibimos tu solicitud</h2>
         <p className="mt-4 max-w-xl text-ink/75">
-          Esta versión del sitio todavía no envía formularios a FERKOR. Tus datos no se han enviado ni guardado.
-          {wa ? " Envíala por WhatsApp con un clic y adjunta en el chat las fotos o planos de la pieza." : " Pronto podrás enviarlos desde aquí o por WhatsApp."}
+          Gracias, {values.nombre}. Te responderemos a {values.correo}.
+          {wa && " Si tienes fotos o planos de la pieza, envíalos por WhatsApp para cotizar más rápido."}
+        </p>
+        {wa && (
+          <div className="mt-6">
+            <a href={wa} target="_blank" rel="noopener noreferrer" className="chamfer-sm inline-flex min-h-12 items-center justify-center bg-red px-6 font-semibold text-white hover:bg-red-hover">
+              Enviar fotos por WhatsApp
+            </a>
+          </div>
+        )}
+      </div>
+    );
+  }
+
+  if (result) {
+    const summary = quoteSummary(values);
+    const wa = whatsappHref(summary);
+    const mail = company.contact.email;
+    return (
+      <div id="q-summary" tabIndex={-1} className="scroll-mt-24 border-2 border-ink bg-white p-7 outline-none md:p-10" role="status">
+        <p className="mono-index text-red">No se pudo enviar</p>
+        <h2 className="display mt-4 text-4xl text-ink md:text-5xl">Envía tu solicitud por otra vía</h2>
+        <p className="mt-4 max-w-xl text-ink/75">
+          No pudimos enviar el formulario en este momento y tus datos no se guardaron.
+          {wa && " Envíala por WhatsApp con un clic y adjunta en el chat las fotos o planos de la pieza."}
+          {mail && (
+            <>
+              {" "}También puedes escribirnos a{" "}
+              <a href={`mailto:${mail}`} className="font-semibold text-ink underline underline-offset-2 hover:text-red">
+                {mail}
+              </a>
+              .
+            </>
+          )}
         </p>
         <pre className="mt-6 overflow-x-auto bg-paper p-5 font-mono text-[13px] leading-relaxed whitespace-pre-wrap text-ink">{summary}</pre>
         <div className="mt-6 flex flex-col gap-3 xs:flex-row">
@@ -125,7 +132,7 @@ export function QuoteForm() {
               Enviar por WhatsApp
             </a>
           )}
-          <button type="button" onClick={() => setReady(false)} className="inline-flex min-h-12 items-center justify-center border border-ink px-6 font-semibold text-ink hover:bg-ink hover:text-white">
+          <button type="button" onClick={() => setResult(null)} className="inline-flex min-h-12 items-center justify-center border border-ink px-6 font-semibold text-ink hover:bg-ink hover:text-white">
             Editar solicitud
           </button>
         </div>
@@ -134,7 +141,12 @@ export function QuoteForm() {
   }
 
   return (
-    <form noValidate onSubmit={onSubmit} className="bg-white p-6 md:p-10" aria-describedby="q-note">
+    <form noValidate onSubmit={onSubmit} className="relative bg-white p-6 md:p-10" aria-describedby="q-note">
+      {/* Trampa para bots: oculta para personas y lectores de pantalla. */}
+      <div aria-hidden="true" className="absolute -left-[9999px] h-px w-px overflow-hidden">
+        <label htmlFor="q-sitio">Sitio web</label>
+        <input id="q-sitio" type="text" tabIndex={-1} autoComplete="off" value={honeypot} onChange={(ev) => setHoneypot(ev.target.value)} />
+      </div>
       <fieldset>
         <legend className="mono-index text-red">01 · Tus datos</legend>
         <div className="mt-5 grid gap-5 md:grid-cols-2">
@@ -169,13 +181,13 @@ export function QuoteForm() {
 
       <fieldset className="mt-10">
         <legend className="mono-index text-red">03 · Fotos o planos</legend>
-        {/* Adjuntos por WhatsApp mientras no exista envío por servidor/correo (decisión del cliente, oct. 2026). */}
+        {/* Adjuntos por WhatsApp (decisión del cliente, oct. 2026): el formulario envía solo texto. */}
         <div className="mt-5 flex gap-4 border border-dashed border-steel-line bg-paper px-5 py-6">
           <MessageCircle size={22} strokeWidth={1.75} aria-hidden="true" className="mt-0.5 shrink-0 text-red" />
           <p className="text-sm text-ink/80">
             <span className="block font-semibold text-ink">Envía las fotos o planos de tu pieza por WhatsApp.</span>
-            Al revisar tu solicitud podrás enviarla por WhatsApp y adjuntar ahí las imágenes: una foto con una huincha al
-            lado nos ayuda a identificar la pieza.
+            Después de enviar el formulario podrás mandarnos las imágenes por WhatsApp: una foto con una huincha al lado nos
+            ayuda a identificar la pieza.
           </p>
         </div>
       </fieldset>
@@ -210,10 +222,10 @@ export function QuoteForm() {
 
       <div className="mt-10 flex flex-col gap-4 border-t border-line pt-8 md:flex-row md:items-center md:justify-between">
         <p id="q-note" className="max-w-md text-sm text-steel">
-          Los campos marcados con * son obligatorios. La solicitud se envía por WhatsApp; el envío por correo está pendiente de habilitar.
+          Los campos marcados con * son obligatorios. Tu solicitud llega por correo a FERKOR.
         </p>
-        <button type="submit" className="chamfer-sm inline-flex min-h-13 items-center justify-center bg-red px-8 font-semibold text-white transition-colors hover:bg-red-hover">
-          Revisar solicitud
+        <button type="submit" disabled={sending} aria-busy={sending} className="chamfer-sm inline-flex min-h-13 items-center justify-center bg-red px-8 font-semibold text-white transition-colors hover:bg-red-hover disabled:cursor-wait disabled:opacity-70">
+          {sending ? "Enviando…" : "Enviar solicitud"}
         </button>
       </div>
     </form>
