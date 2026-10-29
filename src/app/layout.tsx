@@ -3,6 +3,7 @@ import localFont from "next/font/local";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppFloat } from "@/components/ui/WhatsAppFloat";
+import { CookieConsent } from "@/components/ui/CookieConsent";
 import { company } from "@/content/company";
 import { site } from "@/config/site";
 import "./globals.css";
@@ -95,6 +96,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         </main>
         <Footer />
         <WhatsAppFloat />
+        <CookieConsent />
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
       </body>
     </html>

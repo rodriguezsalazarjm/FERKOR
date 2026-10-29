@@ -69,7 +69,9 @@ Sistema en `src/app/globals.css` (sección "Sistema de movimiento"), sin librer�
 | Contraseña SMTP del buzón contacto@ferkor.cl | Vercel → env `SMTP_PASS` (opcional `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`) | Sin ella el formulario ofrece WhatsApp/correo como alternativa |
 | Número de WhatsApp | `src/content/company.ts` → `contact.whatsapp` | Marcado "número por confirmar"; el botón se activa solo al cargarlo |
 | Teléfono, horario | `src/content/company.ts` → `contact` | Marcado "pendiente" (correo: contacto@ferkor.cl) |
-| Razón social, RUT, textos legales | `src/content/company.ts` → `legal` | "Información legal por validar" |
+| Razón social y RUT (aparecen en las políticas) | `src/content/company.ts` → `legal` | Marcados "por confirmar" en /privacidad y /tratamiento-de-datos |
+| Revisión legal de políticas (privacidad, tratamiento de datos, cookies) | `src/app/{privacidad,tratamiento-de-datos,cookies}` | Redactadas según Ley 19.628 / 21.719; pendiente revisión de abogado |
+| Analítica o marketing (si se incorpora) | `src/lib/consent.ts` → `hasConsent()` | No hay; cargar solo con consentimiento y añadir a la tabla de /cookies |
 | Redes sociales confirmadas | `src/content/company.ts` → `social` | No se muestran |
 | Fotografía de ambiente propia (rectificación, taller, medición, Johel si autoriza) | `public/images` + `src/content/images.ts` | Hero, rectificación e industrias siguen con imágenes de Unsplash marcadas "Ref. visual" |
 | Validar nombres y familias de los productos fotografiados | `src/content/catalog.ts` | Nombres genéricos por familia, asignados a partir de las fotos |

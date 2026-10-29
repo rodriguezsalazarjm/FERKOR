@@ -209,6 +209,10 @@ export function QuoteForm() {
             Acepto que FERKOR use mis datos para responder esta solicitud, según la{" "}
             <Link href="/privacidad" className="font-semibold text-ink underline underline-offset-2 hover:text-red">
               política de privacidad
+            </Link>{" "}
+            y la{" "}
+            <Link href="/tratamiento-de-datos" className="font-semibold text-ink underline underline-offset-2 hover:text-red">
+              política de tratamiento de datos
             </Link>
             . *
           </span>

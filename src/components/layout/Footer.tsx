@@ -7,6 +7,8 @@ import { Logo } from "@/components/ui/Logo";
 import { TechnicalGrid } from "@/components/graphics/TechnicalGrid";
 import { Pending } from "@/components/ui/Pending";
 import { ClientLogos } from "@/components/sections/ClientLogos";
+import { legalDocs } from "@/components/sections/inner/LegalDoc";
+import { CookieSettingsButton } from "@/components/ui/CookieConsent";
 
 export function Footer() {
   const wa = whatsappHref();
@@ -97,9 +99,12 @@ export function Footer() {
             © {company.copyrightYear} FERKOR · {company.descriptor} · {company.coverage}
           </p>
           <p className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono tracking-[0.04em]">
-            <Link href="/privacidad" className="hover:text-white">
-              Privacidad y cookies
-            </Link>
+            {legalDocs.map((d) => (
+              <Link key={d.href} href={d.href} className="hover:text-white">
+                {d.label}
+              </Link>
+            ))}
+            <CookieSettingsButton className="cursor-pointer font-mono tracking-[0.04em] hover:text-white" />
             <span>Sitio por UPZITES</span>
           </p>
         </div>

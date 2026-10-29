@@ -135,6 +135,42 @@
     text-transform: uppercase;
   }
 
+  /* Texto de documentos legales: listas y tablas sin clases por elemento. */
+  .legal-body ul {
+    list-style: square;
+    padding-left: 1.1rem;
+  }
+  .legal-body li + li {
+    margin-top: 0.35rem;
+  }
+  .legal-body li::marker {
+    color: var(--color-red);
+  }
+  .legal-body strong {
+    color: var(--color-ink);
+    font-weight: 600;
+  }
+  .legal-body table {
+    width: 100%;
+    font-size: 0.875rem;
+    border-collapse: collapse;
+  }
+  .legal-body th,
+  .legal-body td {
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.6rem 0.75rem 0.6rem 0;
+    text-align: left;
+    vertical-align: top;
+  }
+  .legal-body th {
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--color-steel);
+  }
+
   /* Chaflán a 45° en la esquina superior derecha (corte del isotipo). */
   .chamfer-sm {
     clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 0 100%);
