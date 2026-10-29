@@ -66,10 +66,8 @@ Sistema en `src/app/globals.css` (sección "Sistema de movimiento"), sin librer�
 | Reseñas de clientes reales (mín. 3, con autorización) | `src/content/reviews.ts` | La sección no se muestra hasta tener 3 |
 | Plazo de respuesta que puedan cumplir (ej. 24 h hábiles) | textos de Contacto / Proceso | No se promete plazo |
 | Confirmar si fabrican en taller propio o aliado | `src/app/nosotros/page.tsx` | Textos neutros ("fabricamos", según documento del cliente) |
-| Contraseña SMTP del buzón contacto@ferkor.cl | Vercel → env `SMTP_PASS` (opcional `SMTP_HOST`, `SMTP_PORT`, `SMTP_USER`) | Sin ella el formulario ofrece WhatsApp/correo como alternativa |
 | Número de WhatsApp | `src/content/company.ts` → `contact.whatsapp` | Marcado "número por confirmar"; el botón se activa solo al cargarlo |
 | Teléfono, horario | `src/content/company.ts` → `contact` | Marcado "pendiente" (correo: contacto@ferkor.cl) |
-| Razón social y RUT (aparecen en las políticas) | `src/content/company.ts` → `legal` | Marcados "por confirmar" en /privacidad y /tratamiento-de-datos |
 | Revisión legal de políticas (privacidad, tratamiento de datos, cookies) | `src/app/{privacidad,tratamiento-de-datos,cookies}` | Redactadas según Ley 19.628 / 21.719; pendiente revisión de abogado |
 | Analítica o marketing (si se incorpora) | `src/lib/consent.ts` → `hasConsent()` | No hay; cargar solo con consentimiento y añadir a la tabla de /cookies |
 | Redes sociales confirmadas | `src/content/company.ts` → `social` | No se muestran |

@@ -97,6 +97,12 @@ export function Footer() {
         <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 text-xs text-steel-light md:flex-row md:items-center md:justify-between">
           <p className="font-mono tracking-[0.04em]">
             © {company.copyrightYear} FERKOR · {company.descriptor} · {company.coverage}
+            {company.legal.razonSocial && (
+              <span className="block">
+                {company.legal.razonSocial}
+                {company.legal.rut && ` · RUT ${company.legal.rut}`}
+              </span>
+            )}
           </p>
           <p className="flex flex-wrap items-center gap-x-4 gap-y-1 font-mono tracking-[0.04em]">
             {legalDocs.map((d) => (

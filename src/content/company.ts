@@ -23,8 +23,9 @@ export const company = {
   /** Solo redes confirmadas. Vacío hasta validar. */
   social: [] as { label: string; href: string }[],
   legal: {
-    razonSocial: null as string | null,
-    rut: null as string | null,
+    /** Confirmados por el cliente (oct. 2026). */
+    razonSocial: "Herramientas profesionales S&R" as string | null,
+    rut: "77.420.034-7" as string | null,
   },
   experience: {
     /**
